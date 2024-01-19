@@ -1,0 +1,2 @@
+The reason that we should daisychain the PWM signals for the motor controllers is that it is easier in the programming perspective we wouldn't need to construct the two motor controllers in the constructor rather than just contstrucing
+a motor controller into a PWM value and switching polarity to change motor direction, it just feels like less of a hastle to daisychain the two. In conclusion, I feel I am in the right.

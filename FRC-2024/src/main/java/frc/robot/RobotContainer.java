@@ -109,45 +109,9 @@ private DifferentialDriveOdometry m_odometry;
       //Stop the robot
       new DriveAutoCommand(m_driveController, 0, 0)
     );
-
-    // ----------------------------------------------------------------------------------
-
-    
-    
-    //--- Simulator variable setup ----///
-    // gyro = new AnalogGyro(0);
-    // //addChild("gyro", gyro);
-    // gyro.setSensitivity(0.007);
-    // m_gyroSim = new AnalogGyroSim(gyro);
-    // leftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-    // rightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
-    // leftEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
-    // rightEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
-
-    // m_leftEncoderSim = new EncoderSim(leftEncoder);
-    // m_rightEncoderSim = new EncoderSim(rightEncoder);
-
-    // m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), 0, 0);
-
-    // leftEncoder.reset();
-    // rightEncoder.reset();
-    //--- Simulator -- //
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be
-   * created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with
-   * an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
-   * {@link
-   * CommandXboxController
-   * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or
-   * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
+  // Configures all button mapping bindings for Xbox Controller
   private void configureBindings() {
 
     //Gripper Close Button

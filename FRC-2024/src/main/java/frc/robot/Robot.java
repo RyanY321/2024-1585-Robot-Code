@@ -11,20 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-/**
- * This is a demo program showing the use of the DifferentialDrive class, specifically it contains
- * the code necessary to operate a robot with tank drive.
- */
 public class Robot extends TimedRobot 
 {
-  //Private variables 
-  // private Joystick m_controller;
-  // private Drive m_driveController;
-  // private Pnumatics m_pnumatics;
-  // private Gripper m_gripper;
-  // private Trigger m_gripperBtn;
-  // private Command m_gripperBtnCommand;
-
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;  
   
@@ -49,13 +37,11 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit() 
   {
-
+    // Populates Autonoumous Dropdown Menu
       m_chooser.setDefaultOption("Program One", programOneAuto);
       m_chooser.addOption("Program Two", programTwoAuto);
-      //SmartDashboard.putData("Auto choices", m_chooser);
-
+      // Used for robot SIM
       m_field = new Field2d();
-      //SmartDashboard.putData("Sim Field", m_field);
   }
 
   @Override

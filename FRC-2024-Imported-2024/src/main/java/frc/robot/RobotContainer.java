@@ -11,7 +11,7 @@ import Commands.ArmAutoCommand;
 import Commands.ArmCommand;
 import Commands.DriveAutoCommand;
 import Subsystems.Arm;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -145,7 +145,7 @@ private DifferentialDriveOdometry m_odometry;
    *
    * @return the command to run in autonomous
    */
-  public CommandBase getAutonomousCommand(String selectedAuto) {
+  public Command getAutonomousCommand(String selectedAuto) {
 
       System.out.println(String.format("Getting autonomous program for selected, %s", selectedAuto));  
       return m_progOneAuto;

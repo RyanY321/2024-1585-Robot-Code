@@ -1,7 +1,7 @@
 package Subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -9,15 +9,16 @@ public class Drive extends SubsystemBase
 { 
 
     private DifferentialDrive m_driveController;
-    private final VictorSP m_leftMotor;
-    private final VictorSP m_rightMotor;
+    private final PWMSparkMax m_leftMotor;
+    private final PWMSparkMax m_rightMotor;
     
     public Drive(int leftMotorChannel, 
                 int rightMotorChannel)
     {
-        m_leftMotor = new VictorSP(leftMotorChannel);
-        m_rightMotor = new VictorSP(rightMotorChannel);
+        m_leftMotor = new PWMSparkMax(leftMotorChannel);
+        m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotor, m_rightMotor);
+        //
         m_driveController.setSafetyEnabled(false);
         m_driveController.setExpiration(0.1);
         m_driveController.setMaxOutput(1);

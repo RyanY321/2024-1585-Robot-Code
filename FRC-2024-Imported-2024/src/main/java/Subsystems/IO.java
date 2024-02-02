@@ -9,12 +9,7 @@ public class IO extends SubsystemBase
 {
 
     //TODO : create variables for the buttons for other subsystem such as the arm, modify to correct button mapping
-    private final int gripperCloseButton = 2; // xbox controller B
-    private final int gripperOpenButton = 1; // xbox controller A
-    private final int raiseArmBtn = 5; // xbox controller Left Bumper
-    private final int lowerArmBtn = 6; // xbox controller Right Bumper
-    private final int extendArmBtn = 4; // xbox controller X
-    private final int retractArmBtn = 3; // xbox controller Y
+    private final int AmpShootButton = 1; // xbox controller A
 
 
     //TODO: Swap between xbox and joystick
@@ -51,60 +46,20 @@ public class IO extends SubsystemBase
 
 
     //TODO: Create more methods like these for extending/retracting, raising/lowering the arm
-
-    /**
-     * @details Get the open gripper button trigger 
-     * @return Trigger
-     */
-    public Trigger GetOpenGripperBtn()
+    
+    public Trigger GetAmpShootBtn()
     {
-        return m_controller.button(gripperOpenButton);
+        return m_controller.button(AmpShootButton);
     }
 
-
-    /**
-     * @details Get the close gripper btn trigger
-     * @return
-     */
-    public Trigger GetCloseGripperBtn()
+    public double GetShooterValue()
     {
-        return m_controller.button(gripperCloseButton);
+      return m_controller.getRightTriggerAxis();
     }
 
-     /**
-     * @details Get the raise arm  btn trigger
-     * @return
-     */
-    public Trigger GetRaiseArmBtn()
+    public double GetPickUpValue()
     {
-        return m_controller.button(raiseArmBtn);
-    }
-
-     /**
-     * @details Get the lower arm  btn trigger
-     * @return
-     */
-    public Trigger GetLowerArmBtn()
-    {
-        return m_controller.button(lowerArmBtn);
-    }
-
-    /**
-     * @details Get the Extend Arm btn trigger
-     * @return Trigger
-     */
-    public Trigger GetExtendArmBtn()
-    {
-        return m_controller.button(extendArmBtn);
-    }
-
-    /**
-     * @details Get the retract arm  btn trigger
-     * @return Trigger
-     */
-    public Trigger GetRetractArmBtn()
-    {
-        return m_controller.button(retractArmBtn);
+      return m_controller.getLeftTriggerAxis();
     }
 
     public double GetLiftArmValue()

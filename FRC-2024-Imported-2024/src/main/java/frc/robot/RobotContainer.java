@@ -3,6 +3,7 @@ package frc.robot;
 import Subsystems.Drive;
 import Subsystems.Gripper;
 import Subsystems.IO;
+import Subsystems.Shooter;
 
 import Commands.DriveCommand;
 import Commands.GripperAutoCommand;
@@ -10,7 +11,7 @@ import Commands.GripperCommand;
 import Commands.ArmAutoCommand;
 import Commands.ArmCommand;
 import Commands.DriveAutoCommand;
-import Subsystems.Arm;
+// import Subsystems.Arm;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -29,9 +30,11 @@ public class RobotContainer {
   private Drive m_driveController = new Drive(0, 1);
   private Pnumatics m_pnumatics = new Pnumatics();
   private Gripper m_gripper = new Gripper(m_pnumatics);
-  private Arm m_arm = new Arm(5, 3);
+  // private Arm m_arm = new Arm(5, 3);
+  private Shooter m_shooter = new Shooter(2);
 
-  private ArmCommand m_ArmCommand = new ArmCommand(m_arm, m_controller);
+  private ShooterCommand M_ShooterCommand = new ShooterCommand(m_controller);
+  // private ArmCommand m_ArmCommand = new ArmCommand(m_arm, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
   //private Auto m_auto = new Auto(m_driveController);
@@ -80,19 +83,19 @@ private DifferentialDriveOdometry m_odometry;
 
     // Schedule the drive controller to move
     m_driveController.setDefaultCommand(m_DriveCommand);
-    m_arm.setDefaultCommand(m_ArmCommand);
+    // m_arm.setDefaultCommand(m_ArmCommand);
 
     //------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
 
       //Lower Arm at a speed of .25
-      new ArmAutoCommand(m_arm,-.15),
+      // new ArmAutoCommand(m_arm,-.15),
 
       //Allow the arm to lower for .25 seconds
       new WaitCommand(.25),
       
       //Stop the arm from lowering anymore
-      new ArmAutoCommand(m_arm,0),
+      // new ArmAutoCommand(m_arm,0),
 
       //Openm the gripper
       new GripperAutoCommand(m_gripper),
@@ -115,28 +118,40 @@ private DifferentialDriveOdometry m_odometry;
   private void configureBindings() {
 
     //Gripper Close Button
-    m_controller.GetOpenGripperBtn().whileTrue(m_gripper.openGripperCommand());
-    m_controller.GetOpenGripperBtn().onFalse(m_gripper.StopGrippercommand());
+    // m_controller.GetOpenGripperBtn().whileTrue(m_gripper.openGripperCommand());
+    // m_controller.GetOpenGripperBtn().onFalse(m_gripper.StopGrippercommand());
 
-    //Gripper Close Button
-    m_controller.GetCloseGripperBtn().whileTrue(m_gripper.closeGrippercommand());
-    m_controller.GetCloseGripperBtn().onFalse(m_gripper.StopGrippercommand());
+    // //Gripper Close Button
+    // m_controller.GetCloseGripperBtn().whileTrue(m_gripper.closeGrippercommand());
+    // m_controller.GetCloseGripperBtn().onFalse(m_gripper.StopGrippercommand());
  
     //Raise Arm button
     // m_controller.GetRaiseArmBtn().whileTrue(m_arm.liftArmCommand());
     // m_controller.GetRaiseArmBtn().onFalse(m_arm.stopArmLiftCommand());
 
+    //Shoot Shooter Button 
+    m_controller.GetShooterBtn().whileTrue(m_shooter.ShootCommand);
+    m_controller.GetShooterBtn().onFalse(m_shooter.ShootCommand);
+
+    //Pick Up Button
+    m_controller.GetPickUpBtn().WhileTrue(m_shooter.PickUpCommand);
+    m_controller.GetPickUpBtn().onFalse(m_shooter.PickUpCommand);
+
+    //Amp Shoot Button
+    m_controller.GetAmpShootBtn().WhileTrue(m_shooter.AmpShootCommand);
+    m_controller.GetAmpShootBtn().onFalse(m_shooter.AmpShootCommand);
+
     //Lower Arm Button
-    m_controller.GetLowerArmBtn().whileTrue(m_arm.lowerArmCommand());
-    m_controller.GetLowerArmBtn().onFalse(m_arm.stopArmLiftCommand());
+    // m_controller.GetLowerArmBtn().whileTrue(m_arm.lowerArmCommand());
+    // m_controller.GetLowerArmBtn().onFalse(m_arm.stopArmLiftCommand());
 
     //Extend Arm Button
-    m_controller.GetExtendArmBtn().whileTrue(m_arm.extendArmCommand());
-    m_controller.GetExtendArmBtn().onFalse(m_arm.stopArmExtendCommand());
+    // m_controller.GetExtendArmBtn().whileTrue(m_arm.extendArmCommand());
+    // m_controller.GetExtendArmBtn().onFalse(m_arm.stopArmExtendCommand());
 
     //Retract Arm Button
-    m_controller.GetRetractArmBtn().whileTrue(m_arm.retractArmCommand());
-    m_controller.GetRetractArmBtn().onFalse(m_arm.stopArmExtendCommand());
+    // m_controller.GetRetractArmBtn().whileTrue(m_arm.retractArmCommand());
+    // m_controller.GetRetractArmBtn().onFalse(m_arm.stopArmExtendCommand());
 
   }
 

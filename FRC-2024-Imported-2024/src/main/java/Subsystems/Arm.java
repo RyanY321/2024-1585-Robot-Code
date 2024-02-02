@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-// import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 
 //TODO: this is a stub class that needs implementation. I have
 // Added some functions that I think we need. They are in no 
@@ -21,8 +18,6 @@ public class Arm extends SubsystemBase
 
     //This can be the winch motor controller. We can setup this controller to have a closed
     //loop setup where we tie in the endstops that way we dont have to keep track of them
-    // private final PWMSparkMax m_winchMotor;
-    // private final CANSparkMax m_winchMotor
 
 
     //private final Relay m_testLiftMotor = new Relay(0);
@@ -38,8 +33,6 @@ public class Arm extends SubsystemBase
         m_liftMotor = new PWMSparkMax(liftMotorChannel);
         // m_extendMotor = new VictorSP(extendMotorChannel);
         m_extendMotor = new PWMSparkMax(extendMotorChannel);
-        // m_winchMotor=  new CANSparkMax(winchMotorDeviceId,MotorType.kBrushed);
-        // m_winchMotor = new PWMSparkMax(2);
     }
 
 

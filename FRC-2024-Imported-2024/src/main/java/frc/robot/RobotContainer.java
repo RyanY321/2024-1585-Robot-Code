@@ -9,7 +9,7 @@ import Commands.DriveCommand;
 import Commands.GripperAutoCommand;
 import Commands.GripperCommand;
 import Commands.ArmAutoCommand;
-import Commands.ArmCommand;
+import Commands.ShooterCommand;
 import Commands.DriveAutoCommand;
 // import Subsystems.Arm;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,7 +33,7 @@ public class RobotContainer {
   // private Arm m_arm = new Arm(5, 3);
   private Shooter m_shooter = new Shooter(2);
 
-  private ShooterCommand M_ShooterCommand = new ShooterCommand(m_controller);
+  private ShooterCommand m_ShooterCommand = new ShooterCommand(m_shooter, m_controller);
   // private ArmCommand m_ArmCommand = new ArmCommand(m_arm, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
@@ -84,6 +84,7 @@ private DifferentialDriveOdometry m_odometry;
     // Schedule the drive controller to move
     m_driveController.setDefaultCommand(m_DriveCommand);
     // m_arm.setDefaultCommand(m_ArmCommand);
+    m_shooter.setDefaultCommand((m_ShooterCommand));
 
     //------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
@@ -130,16 +131,16 @@ private DifferentialDriveOdometry m_odometry;
     // m_controller.GetRaiseArmBtn().onFalse(m_arm.stopArmLiftCommand());
 
     //Shoot Shooter Button 
-    m_controller.GetShooterBtn().whileTrue(m_shooter.ShootCommand);
-    m_controller.GetShooterBtn().onFalse(m_shooter.ShootCommand);
+    m_controller.GetShooterBtn().whileTrue(m_shooter.ShooterCommand());
+    m_controller.GetShooterBtn().onFalse(m_shooter.StopShooterCommand());
 
-    //Pick Up Button
-    m_controller.GetPickUpBtn().WhileTrue(m_shooter.PickUpCommand);
-    m_controller.GetPickUpBtn().onFalse(m_shooter.PickUpCommand);
+    //Reverse Shooter Button
+    m_controller.GetReverseShooterBtn().whileTrue(m_shooter.ReverseShooterCommand());
+    m_controller.GetReverseShooterBtn().onFalse(m_shooter.StopShooterCommand());
 
     //Amp Shoot Button
-    m_controller.GetAmpShootBtn().WhileTrue(m_shooter.AmpShootCommand);
-    m_controller.GetAmpShootBtn().onFalse(m_shooter.AmpShootCommand);
+    m_controller.GetAmpShootBtn().whileTrue(m_shooter.AmpShooterCommand());
+    m_controller.GetAmpShootBtn().onFalse(m_shooter.AmpShooterCommand());
 
     //Lower Arm Button
     // m_controller.GetLowerArmBtn().whileTrue(m_arm.lowerArmCommand());

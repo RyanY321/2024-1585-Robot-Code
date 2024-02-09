@@ -2,12 +2,14 @@ package Commands;
 import Subsystems.Shooter;
 import Subsystems.IO;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public class ShooterCommand {
+public class ShooterCommand extends Command {
+    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     public final Shooter m_shooterSubsystem;
     private final IO m_controller;
 
-    private boolean isFinished = false;
+    private boolean isFinshed = false;
 
     public ShooterCommand(Shooter shooterSubsystem, IO controller) {
         m_shooterSubsystem = shooterSubsystem;
@@ -22,24 +24,22 @@ public class ShooterCommand {
     }
 
     
-    public void execute() {
+    public void ForwardShoot() {
         double val = m_controller.GetShooterValue();
         if(val > 0)
         {
             m_shooterSubsystem.Shoot(val);
         }
-        isFinished = true;
-
-        
+        isFinshed = true;
     }
 
-    public void execute() {
-        double val = m_controller.GetPickUpValue();
-        if (val > 0)
+        public void ReverseShoot() {
+        double val = m_controller.GetReverseShooterValue();
+        if(val > 0)
         {
-            m_shooterSubsystem.PickUp(val);
+            m_shooterSubsystem.ReverseShoot(val);
         }
-        isFinished = true;
+        isFinshed = true;
     }
 
     public void end(boolean interrupted) {}

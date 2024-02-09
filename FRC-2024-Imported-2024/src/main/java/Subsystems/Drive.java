@@ -22,6 +22,8 @@ public class Drive extends SubsystemBase
         m_driveController.setSafetyEnabled(false);
         m_driveController.setExpiration(0.1);
         m_driveController.setMaxOutput(1);
+        m_leftMotor.setInverted(true);
+        m_rightMotor.setInverted(false);
     }
 
     public Command moveArcadeCommand(double xSpeed, double zRotation) {

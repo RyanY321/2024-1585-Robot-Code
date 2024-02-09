@@ -9,7 +9,9 @@ public class IO extends SubsystemBase
 {
 
     //TODO : create variables for the buttons for other subsystem such as the arm, modify to correct button mapping
-    private final int AmpShootButton = 1; // xbox controller A
+    private final int AmpShootButton = 2; // xbox controller B
+    private final int ShooterButton = 3; // Xbox Controller Right Trigger
+    private final int ReverseShooterButton = 4; // Xbox Controller Left Trigger
 
 
     //TODO: Swap between xbox and joystick
@@ -52,21 +54,29 @@ public class IO extends SubsystemBase
         return m_controller.button(AmpShootButton);
     }
 
+    public Trigger GetShooterBtn()
+    {
+      return m_controller.button(ShooterButton);
+    }
+    
+    public Trigger GetReverseShooterBtn()
+    {
+      return m_controller.button(ReverseShooterButton);
+    }
+
+    /**
+     * @details Get the retract arm  btn trigger
+     * @return Trigger
+     */
     public double GetShooterValue()
     {
       return m_controller.getRightTriggerAxis();
     }
 
-    public double GetPickUpValue()
+    public double GetReverseShooterValue()
     {
       return m_controller.getLeftTriggerAxis();
     }
-
-    public double GetLiftArmValue()
-    {
-        return m_controller.getLeftTriggerAxis();
-    }
-
 
 
     @Override

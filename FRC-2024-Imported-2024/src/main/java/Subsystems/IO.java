@@ -9,7 +9,7 @@ public class IO extends SubsystemBase
 {
 
     //TODO : create variables for the buttons for other subsystem such as the arm, modify to correct button mapping
-    private final int AmpShootButton = 2; // xbox controller B
+    private final int AmpShootButton = 1; // xbox controller B
     private final int ShooterButton = 3; // Xbox Controller Right Trigger
     private final int ReverseShooterButton = 4; // Xbox Controller Left Trigger
 

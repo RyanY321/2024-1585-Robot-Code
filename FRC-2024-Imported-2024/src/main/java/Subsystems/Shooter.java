@@ -63,7 +63,7 @@ public class Shooter extends SubsystemBase
     private void AmpShooting()
     {
         System.out.println("Shooting At Amp...");
-        m_shooter.set(0.10);
+        m_shooter.set(0.50);
     }
 
     public void periodic() {

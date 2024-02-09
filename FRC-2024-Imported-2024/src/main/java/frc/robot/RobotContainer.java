@@ -140,7 +140,7 @@ private DifferentialDriveOdometry m_odometry;
 
     //Amp Shoot Button
     m_controller.GetAmpShootBtn().whileTrue(m_shooter.AmpShooterCommand());
-    m_controller.GetAmpShootBtn().onFalse(m_shooter.AmpShooterCommand());
+    m_controller.GetAmpShootBtn().onFalse(m_shooter.StopShooterCommand());
 
     //Lower Arm Button
     // m_controller.GetLowerArmBtn().whileTrue(m_arm.lowerArmCommand());

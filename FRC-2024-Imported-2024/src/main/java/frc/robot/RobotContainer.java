@@ -1,15 +1,13 @@
 package frc.robot;
 
 import Subsystems.Drive;
-import Subsystems.Gripper;
 import Subsystems.IO;
 import Subsystems.Shooter;
+import Subsystems.Climber;
 
 import Commands.DriveCommand;
-import Commands.GripperAutoCommand;
-import Commands.GripperCommand;
-import Commands.ArmAutoCommand;
 import Commands.ShooterCommand;
+import Commands.ClimberCommand;
 import Commands.DriveAutoCommand;
 // import Subsystems.Arm;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,13 +26,11 @@ import edu.wpi.first.wpilibj.simulation.EncoderSim;
 public class RobotContainer {
   private IO m_controller = new IO();
   private Drive m_driveController = new Drive(0, 1);
-  private Pnumatics m_pnumatics = new Pnumatics();
-  private Gripper m_gripper = new Gripper(m_pnumatics);
-  // private Arm m_arm = new Arm(5, 3);
-  private Shooter m_shooter = new Shooter(2);
+  private Shooter m_shooter = new Shooter(2, 3);
+  private Climber m_climber = new Climber(4);
 
+  private ClimberCommand m_ClimberCommand = new ClimberCommand(m_climber, m_controller);
   private ShooterCommand m_ShooterCommand = new ShooterCommand(m_shooter, m_controller);
-  // private ArmCommand m_ArmCommand = new ArmCommand(m_arm, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
   //private Auto m_auto = new Auto(m_driveController);
@@ -83,24 +79,15 @@ private DifferentialDriveOdometry m_odometry;
 
     // Schedule the drive controller to move
     m_driveController.setDefaultCommand(m_DriveCommand);
-    // m_arm.setDefaultCommand(m_ArmCommand);
     m_shooter.setDefaultCommand((m_ShooterCommand));
+    m_climber.setDefaultCommand((m_ClimberCommand));
 
     //------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
 
-      //Lower Arm at a speed of .25
-      // new ArmAutoCommand(m_arm,-.15),
-
       //Allow the arm to lower for .25 seconds
       new WaitCommand(.25),
       
-      //Stop the arm from lowering anymore
-      // new ArmAutoCommand(m_arm,0),
-
-      //Openm the gripper
-      new GripperAutoCommand(m_gripper),
-
       //wait .5 seconds for gripper to open
       new WaitCommand(.25),
 
@@ -118,42 +105,17 @@ private DifferentialDriveOdometry m_odometry;
   // Configures all button mapping bindings for Xbox Controller
   private void configureBindings() {
 
-    //Gripper Close Button
-    // m_controller.GetOpenGripperBtn().whileTrue(m_gripper.openGripperCommand());
-    // m_controller.GetOpenGripperBtn().onFalse(m_gripper.StopGrippercommand());
+    //High Shoot Power Button 
+    m_controller.GetHighShootBtn().whileTrue(m_shooter.ShootCommand(1.00));
+    m_controller.GetHighShootBtn().onFalse(m_shooter.ShootCommand(0.00));
 
-    // //Gripper Close Button
-    // m_controller.GetCloseGripperBtn().whileTrue(m_gripper.closeGrippercommand());
-    // m_controller.GetCloseGripperBtn().onFalse(m_gripper.StopGrippercommand());
- 
-    //Raise Arm button
-    // m_controller.GetRaiseArmBtn().whileTrue(m_arm.liftArmCommand());
-    // m_controller.GetRaiseArmBtn().onFalse(m_arm.stopArmLiftCommand());
+    //Low Shoot Power Button
+    m_controller.GetLowShootBtn().whileTrue(m_shooter.ShootCommand(0.50));
+    m_controller.GetLowShootBtn().onFalse(m_shooter.ShootCommand(0.00));
 
-    //Shoot Shooter Button 
-    m_controller.GetShooterBtn().whileTrue(m_shooter.ShooterCommand());
-    m_controller.GetShooterBtn().onFalse(m_shooter.StopShooterCommand());
-
-    //Reverse Shooter Button
-    m_controller.GetReverseShooterBtn().whileTrue(m_shooter.ReverseShooterCommand());
-    m_controller.GetReverseShooterBtn().onFalse(m_shooter.StopShooterCommand());
-
-    //Amp Shoot Button
-    m_controller.GetAmpShootBtn().whileTrue(m_shooter.AmpShooterCommand());
-    m_controller.GetAmpShootBtn().onFalse(m_shooter.StopShooterCommand());
-
-    //Lower Arm Button
-    // m_controller.GetLowerArmBtn().whileTrue(m_arm.lowerArmCommand());
-    // m_controller.GetLowerArmBtn().onFalse(m_arm.stopArmLiftCommand());
-
-    //Extend Arm Button
-    // m_controller.GetExtendArmBtn().whileTrue(m_arm.extendArmCommand());
-    // m_controller.GetExtendArmBtn().onFalse(m_arm.stopArmExtendCommand());
-
-    //Retract Arm Button
-    // m_controller.GetRetractArmBtn().whileTrue(m_arm.retractArmCommand());
-    // m_controller.GetRetractArmBtn().onFalse(m_arm.stopArmExtendCommand());
-
+    //Reverse The Shooter Button
+    m_controller.GetReverseShooterBtn().whileTrue(m_shooter.ShootCommand(-0.30));
+    m_controller.GetReverseShooterBtn().whileFalse(m_shooter.ShootCommand(0.00));
   }
 
   /**

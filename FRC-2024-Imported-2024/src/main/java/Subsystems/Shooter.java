@@ -6,64 +6,28 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase
 {
-    private final PWMSparkMax m_shooter;
+    private final PWMSparkMax m_frontMotor;
+    private final PWMSparkMax m_backMotor;
 
-    public Shooter(int 
-    ShooterMotorChannel)
+    public Shooter(int FrontShootMotorChannel, int BackShootMotorChannel)
     {
-        m_shooter = new PWMSparkMax(ShooterMotorChannel);
+        m_frontMotor = new PWMSparkMax(FrontShootMotorChannel);
+        m_backMotor = new PWMSparkMax(BackShootMotorChannel);
     }
 
-    public Command ShooterCommand() {
+    public Command ShootCommand(double speed) {
         return run(
             () -> {
-                this.Shoot(0);
+                this.Shoot(speed);
             });
         }
 
-    public Command StopShooterCommand() {
-        return runOnce(
-            () -> {
-                this.StopShoot();
-            });
-    }
-
-    public Command ReverseShooterCommand() {
-        return run(
-            () -> {
-                this.ReverseShoot(0);
-            });
-    }
-
-    public Command AmpShooterCommand() {
-    return run(
-        () -> {
-            this.AmpShooting();
-        });
-    }
 
     public void Shoot(double speed)
     {
-        System.out.println("Turning On Shooter...");
-        m_shooter.set(speed);
-    }
-
-    public void ReverseShoot(double speed)
-    {
-        System.out.println("Reversing The Shooter...");
-        m_shooter.set(speed);
-    }
-
-    private void StopShoot()
-    {
-        System.out.println("Stopping The Shooter...");
-        m_shooter.set(0.00);
-    }
-
-    private void AmpShooting()
-    {
-        System.out.println("Shooting At Amp...");
-        m_shooter.set(0.50);
+        System.out.println("Turning On High Power Shooter...");
+        m_frontMotor.set(speed);
+        m_backMotor.set(speed);
     }
 
     public void periodic() {

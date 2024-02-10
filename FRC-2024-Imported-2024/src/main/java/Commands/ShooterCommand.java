@@ -9,7 +9,7 @@ public class ShooterCommand extends Command {
     public final Shooter m_shooterSubsystem;
     private final IO m_controller;
 
-    private boolean isFinshed = false;
+    private boolean isFinished = false;
 
     public ShooterCommand(Shooter shooterSubsystem, IO controller) {
         m_shooterSubsystem = shooterSubsystem;
@@ -23,24 +23,13 @@ public class ShooterCommand extends Command {
         System.out.println("Shooter Command initialized...");
     }
 
-    
-    public void ForwardShoot() {
-        double val = m_controller.GetShooterValue();
-        if(val > 0)
-        {
-            m_shooterSubsystem.Shoot(val);
-        }
-        isFinshed = true;
+     // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        //m_driveSubsystem.MoveArcade(-m_controller.GetY(), -m_controller.GetX());
+        isFinished = true;
     }
-
-        public void ReverseShoot() {
-        double val = m_controller.GetReverseShooterValue();
-        if(val > 0)
-        {
-            m_shooterSubsystem.ReverseShoot(val);
-        }
-        isFinshed = true;
-    }
+  
 
     public void end(boolean interrupted) {}
   

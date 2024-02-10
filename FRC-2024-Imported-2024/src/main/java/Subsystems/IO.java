@@ -1,5 +1,6 @@
 package Subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -13,11 +14,10 @@ public class IO extends SubsystemBase
     private final int HighShootButton = 4; // Xbox Controller Y
     private final int ReverseShooterButton = 5; // Xbox Controller Left Bumper
 
-
-
     //TODO: Swap between xbox and joystick
     private CommandJoystick m_joystickController =  new CommandJoystick(0);
     private CommandXboxController m_controller = new CommandXboxController(1);
+
 
     public IO()
     {
@@ -64,13 +64,6 @@ public class IO extends SubsystemBase
     {
       return m_controller.button(HighShootButton);
     }
-    
-
-    /**
-     * @details Get the retract arm  btn trigger
-     * @return Trigger
-     */
-
 
     @Override
 

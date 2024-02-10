@@ -4,6 +4,7 @@ import Subsystems.Drive;
 import Subsystems.IO;
 import Subsystems.Shooter;
 import Subsystems.Climber;
+import Subsystems.Gyro;
 
 import Commands.DriveCommand;
 import Commands.ShooterCommand;
@@ -13,22 +14,26 @@ import Commands.DriveAutoCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.simulation.AnalogGyroSim;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.simulation.EncoderSim;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotGearing;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotMotor;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotWheelSize;
 
 public class RobotContainer {
   private IO m_controller = new IO();
-  private Drive m_driveController = new Drive(0, 1);
+  public Gyro m_gyro = new Gyro();
+  private Drive m_driveController = new Drive(m_gyro, 0, 1);
   private Shooter m_shooter = new Shooter(2, 3);
   private Climber m_climber = new Climber(4);
-
   private ClimberCommand m_ClimberCommand = new ClimberCommand(m_climber, m_controller);
   private ShooterCommand m_ShooterCommand = new ShooterCommand(m_shooter, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
@@ -45,7 +50,7 @@ public class RobotContainer {
   //-------Simulator Variables -----///
   //TODO: put these in a seperate subsystem
   private AnalogGyro gyro;
-  private AnalogGyroSim m_gyroSim;
+  private AnalogGyroSim m_gyroSim = new AnalogGyroSim(0);
 
   private Encoder leftEncoder;
   private Encoder rightEncoder;
@@ -56,12 +61,12 @@ public class RobotContainer {
   private static final int kEncoderResolution = 4096;
 
   
-  // private DifferentialDrivetrainSim m_driveSim = DifferentialDrivetrainSim.createKitbotSim(
-  //   KitbotMotor.kDoubleFalcon500PerSide, // 2 CIMs per side.
-  //   KitbotGearing.k10p71, // 10.71:1
-  //   KitbotWheelSize.kSixInch, // 6" diameter wheels.
-  //   null // No measurement noise.
-// );
+  private DifferentialDrivetrainSim m_driveSim = DifferentialDrivetrainSim.createKitbotSim(
+    KitbotMotor.kDoubleFalcon500PerSide, // 2 CIMs per side.
+    KitbotGearing.k10p71, // 10.71:1
+    KitbotWheelSize.kSixInch, // 6" diameter wheels.
+    null // No measurement noise.
+);
 
 private DifferentialDriveOdometry m_odometry;
 
@@ -81,6 +86,28 @@ private DifferentialDriveOdometry m_odometry;
     m_driveController.setDefaultCommand(m_DriveCommand);
     m_shooter.setDefaultCommand((m_ShooterCommand));
     m_climber.setDefaultCommand((m_ClimberCommand));
+
+        //--- Simulator variable setup ----///
+      if(Robot.isSimulation())
+      {
+        gyro = new AnalogGyro(0);
+      // m_simaddChild("gyro", gyro);
+        gyro.setSensitivity(0.007);
+        m_gyroSim = new AnalogGyroSim(gyro);
+        leftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+        rightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
+        leftEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
+        rightEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
+
+        m_leftEncoderSim = new EncoderSim(leftEncoder);
+        m_rightEncoderSim = new EncoderSim(rightEncoder);
+
+        m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d(), 0, 0);
+
+        leftEncoder.reset();
+        rightEncoder.reset();
+        //--- Simulator -- //
+      }
 
     //------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
@@ -148,27 +175,27 @@ private DifferentialDriveOdometry m_odometry;
 
   public void SimPeriodic()
   {
-      // System.out.println("Execute sim");
-      // double leftVal = m_driveController.GetLeft();
-      // double rightVal = m_driveController.GetRight();
+      System.out.println("Execute sim");
+      double leftVal = m_driveController.GetLeft();
+      double rightVal = m_driveController.GetRight();
 
-      // m_driveSim.setInputs(leftVal* RobotController.getInputVoltage(),
-      //           rightVal * RobotController.getInputVoltage());
+      m_driveSim.setInputs(leftVal* RobotController.getInputVoltage(),
+                rightVal * RobotController.getInputVoltage());
 
-      //   // Advance the model by 20 ms. Note that if you are running this
-      //   // subsystem in a separate thread or have changed the nominal timestep
-      //   // of TimedRobot, this value needs to match it.
-      //   m_driveSim.update(0.02);
+        // Advance the model by 20 ms. Note that if you are running this
+        // subsystem in a separate thread or have changed the nominal timestep
+        // of TimedRobot, this value needs to match it.
+        m_driveSim.update(0.02);
 
-      //   // Update all of our sensors.
-      //   m_leftEncoderSim.setDistance(m_driveSim.getLeftPositionMeters());
-      //   m_leftEncoderSim.setRate(m_driveSim.getLeftVelocityMetersPerSecond());
-      //   m_rightEncoderSim.setDistance(m_driveSim.getRightPositionMeters());
-      //   m_rightEncoderSim.setRate(m_driveSim.getRightVelocityMetersPerSecond());
-      //   m_gyroSim.setAngle(-m_driveSim.getHeading().getDegrees());
+        // Update all of our sensors.
+        m_leftEncoderSim.setDistance(m_driveSim.getLeftPositionMeters());
+        m_leftEncoderSim.setRate(m_driveSim.getLeftVelocityMetersPerSecond());
+        m_rightEncoderSim.setDistance(m_driveSim.getRightPositionMeters());
+        m_rightEncoderSim.setRate(m_driveSim.getRightVelocityMetersPerSecond());
+        m_gyroSim.setAngle(-m_driveSim.getHeading().getDegrees());
 
-      //   m_odometry.update(gyro.getRotation2d(),
-      //   leftEncoder.getDistance(),
-      //   rightEncoder.getDistance());
+        m_odometry.update(gyro.getRotation2d(),
+        leftEncoder.getDistance(),
+        rightEncoder.getDistance());
   }
 }

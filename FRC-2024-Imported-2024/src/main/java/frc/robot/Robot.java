@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,8 +41,12 @@ public class Robot extends TimedRobot
     // Populates Autonoumous Dropdown Menu
       m_chooser.setDefaultOption("Program One", programOneAuto);
       m_chooser.addOption("Program Two", programTwoAuto);
+      
+      Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
+
       // Used for robot SIM
       m_field = new Field2d();
+      SmartDashboard.putData("Field", m_field);
   }
 
   @Override
@@ -112,8 +117,8 @@ public class Robot extends TimedRobot
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {
-    // m_robotContainer.SimPeriodic();
-    // m_field.setRobotPose(m_robotContainer.GetPoseMeters());
+      m_robotContainer.SimPeriodic();
+      m_field.setRobotPose(m_robotContainer.GetPoseMeters());
 
   }
 

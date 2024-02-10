@@ -1,5 +1,6 @@
 package Subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,10 +12,11 @@ public class Drive extends SubsystemBase
     private DifferentialDrive m_driveController;
     private final PWMSparkMax m_leftMotor;
     private final PWMSparkMax m_rightMotor;
-    
-    public Drive(int leftMotorChannel, 
-                int rightMotorChannel)
+    private final Gyro m_gyro;
+
+    public Drive(Gyro gyro, int leftMotorChannel, int rightMotorChannel)
     {
+        m_gyro = gyro;
         m_leftMotor = new PWMSparkMax(leftMotorChannel);
         m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotor, m_rightMotor);
@@ -62,7 +64,7 @@ public class Drive extends SubsystemBase
     {
         return m_rightMotor.get();
     }
-
+    
     @Override
 
     public void periodic() {

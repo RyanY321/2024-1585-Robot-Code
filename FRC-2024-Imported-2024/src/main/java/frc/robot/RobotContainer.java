@@ -3,12 +3,10 @@ package frc.robot;
 import Subsystems.Drive;
 import Subsystems.IO;
 import Subsystems.Shooter;
-import Subsystems.Climber;
 import Subsystems.Gyro;
 
 import Commands.DriveCommand;
 import Commands.ShooterCommand;
-import Commands.ClimberCommand;
 import Commands.DriveAutoCommand;
 // import Subsystems.Arm;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,9 +30,7 @@ public class RobotContainer {
   private IO m_controller = new IO();
   public Gyro m_gyro = new Gyro();
   private Drive m_driveController = new Drive(m_gyro, 0, 1);
-  private Shooter m_shooter = new Shooter(2, 3);
-  private Climber m_climber = new Climber(4);
-  private ClimberCommand m_ClimberCommand = new ClimberCommand(m_climber, m_controller);
+  private Shooter m_shooter = new Shooter(2, 3, 4);
   private ShooterCommand m_ShooterCommand = new ShooterCommand(m_shooter, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
@@ -48,7 +44,6 @@ public class RobotContainer {
   private double leftAutoSpeed = rightAutoSpeed * .98;
 
   //-------Simulator Variables -----///
-  //TODO: put these in a seperate subsystem
   private AnalogGyro gyro;
   private AnalogGyroSim m_gyroSim = new AnalogGyroSim(0);
 
@@ -85,7 +80,6 @@ private DifferentialDriveOdometry m_odometry;
     // Schedule the drive controller to move
     m_driveController.setDefaultCommand(m_DriveCommand);
     m_shooter.setDefaultCommand((m_ShooterCommand));
-    m_climber.setDefaultCommand((m_ClimberCommand));
 
         //--- Simulator variable setup ----///
       if(Robot.isSimulation())
@@ -143,6 +137,14 @@ private DifferentialDriveOdometry m_odometry;
     //Reverse The Shooter Button
     m_controller.GetReverseShooterBtn().whileTrue(m_shooter.ShootCommand(-0.30));
     m_controller.GetReverseShooterBtn().whileFalse(m_shooter.ShootCommand(0.00));
+
+    //Lift Button
+    m_controller.GetLiftBtn().whileTrue(m_shooter.LiftCommand(0.50));
+    m_controller.GetLiftBtn().whileFalse(m_shooter.LiftCommand(0.00));
+
+    //Lower Button
+    m_controller.GetLowerBtn().whileTrue(m_shooter.LiftCommand(0.30));
+    m_controller.GetLowerBtn().whileFalse(m_shooter.LiftCommand(0.00));
   }
 
   /**

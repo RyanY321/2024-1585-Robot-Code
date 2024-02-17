@@ -18,7 +18,6 @@ public class Pnumatics
     // private final Solenoid m_solenoidA;
     //private final Solenoid m_SolenoidB;
 
-    //TODO: add parameters to the constructor to allow for configuration. 
     public Pnumatics()
     {
         m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);

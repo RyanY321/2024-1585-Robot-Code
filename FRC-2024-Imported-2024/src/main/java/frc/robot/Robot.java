@@ -43,8 +43,6 @@ public class Robot extends TimedRobot
       m_chooser.addOption("Program Two", programTwoAuto);
       
       Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
-      // Shuffleboard.getTab("SmartDashboard").add(m_robotContainer.m_gyro.GetGyro());
-      // SmartDashboard.putData(m_robotContainer.m_gyro.GetGyro());
 
       // Used for robot SIM
       m_field = new Field2d();

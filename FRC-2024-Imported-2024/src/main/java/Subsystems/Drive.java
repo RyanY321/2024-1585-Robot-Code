@@ -13,6 +13,7 @@ public class Drive extends SubsystemBase
     private final PWMSparkMax m_leftMotor;
     private final PWMSparkMax m_rightMotor;
     private final Gyro m_gyro;
+    private double kP = 1;
 
     public Drive(Gyro gyro, int leftMotorChannel, int rightMotorChannel)
     {
@@ -52,7 +53,9 @@ public class Drive extends SubsystemBase
 
     public void MoveTank(double leftSpeed, double rightSpeed)
     {
-        m_driveController.tankDrive(leftSpeed, rightSpeed);
+        double error = m_gyro.GetStartHeading() - m_gyro.GetGyro().getAngle();
+        // m_driveController.tankDrive(leftSpeed, rightSpeed);
+        m_driveController.tankDrive(leftSpeed + kP * error, rightSpeed - kP * error);   
     }
 
     public double GetLeft()

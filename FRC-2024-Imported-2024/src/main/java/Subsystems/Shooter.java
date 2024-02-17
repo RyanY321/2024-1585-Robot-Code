@@ -25,7 +25,8 @@ public class Shooter extends SubsystemBase
 
     public void Shoot(double speed)
     {
-        System.out.println("Turning On High Power Shooter...");
+        System.out.println("Shooter Starting At % Speed:");
+        System.out.println(speed);
         m_frontMotor.set(speed);
         m_backMotor.set(speed);
     }

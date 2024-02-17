@@ -143,7 +143,7 @@ private DifferentialDriveOdometry m_odometry;
     m_controller.GetLiftBtn().whileFalse(m_shooter.LiftCommand(0.00));
 
     //Lower Button
-    m_controller.GetLowerBtn().whileTrue(m_shooter.LiftCommand(0.30));
+    m_controller.GetLowerBtn().whileTrue(m_shooter.LiftCommand(-0.30));
     m_controller.GetLowerBtn().whileFalse(m_shooter.LiftCommand(0.00));
   }
 

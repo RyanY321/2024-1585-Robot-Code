@@ -3,6 +3,7 @@ package Subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Launcher extends SubsystemBase {
@@ -43,9 +44,9 @@ public class Launcher extends SubsystemBase {
     }
 
     public void Launch(double speed) {
-        System.out.println("launching Starting At % Speed:");
-        System.out.println(speed);
+        System.out.System.err.println("Turning On The Launcher...");
         m_frontMotor.set(speed);
+        Commands.waitSeconds(1.5);
         m_backMotor.set(speed);
     }
 

@@ -7,19 +7,16 @@ public class Gyro extends SubsystemBase {
     private final ADXRS450_Gyro m_gyro;
     private double m_heading = 0.0;
 
-    public double GetStartHeading()
-    {
+    public double GetStartHeading() {
         return m_heading;
     }
 
-    public Gyro()
-    {
+    public Gyro() {
         m_gyro = new ADXRS450_Gyro();
         m_heading = m_gyro.getAngle();
     }
 
-    public ADXRS450_Gyro GetGyro()
-    {
+    public ADXRS450_Gyro GetGyro() {
         return m_gyro;
     }
 

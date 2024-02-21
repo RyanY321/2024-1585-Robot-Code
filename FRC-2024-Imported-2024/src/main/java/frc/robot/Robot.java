@@ -12,11 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-public class Robot extends TimedRobot 
-{
+public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private RobotContainer m_robotContainer;  
-  
+  private RobotContainer m_robotContainer;
 
   private static final String programOneAuto = "Program One";
   private static final String programTwoAuto = "Program Two";
@@ -25,28 +23,24 @@ public class Robot extends TimedRobot
 
   private Field2d m_field;
 
-
   /**
    * @implNote Robot Constructor
    */
-  public Robot()
-  {
-      m_robotContainer = new RobotContainer();
+  public Robot() {
+    m_robotContainer = new RobotContainer();
   }
 
-
   @Override
-  public void robotInit() 
-  {
+  public void robotInit() {
     // Populates Autonoumous Dropdown Menu
-      m_chooser.setDefaultOption("Program One", programOneAuto);
-      m_chooser.addOption("Program Two", programTwoAuto);
-      
-      Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
+    m_chooser.setDefaultOption("Program One", programOneAuto);
+    m_chooser.addOption("Program Two", programTwoAuto);
 
-      // Used for robot SIM
-      m_field = new Field2d();
-      SmartDashboard.putData("Field", m_field);
+    Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
+
+    // Used for robot SIM
+    m_field = new Field2d();
+    SmartDashboard.putData("Field", m_field);
   }
 
   @Override
@@ -54,21 +48,29 @@ public class Robot extends TimedRobot
   }
 
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // Runs the Scheduler. This is responsible for polling buttons, adding
+    // newly-scheduled
+    // commands, running already-scheduled commands, removing finished or
+    // interrupted commands,
+    // and running subsystem periodic() methods. This must be called from the
+    // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  /**
+   * This autonomous runs the autonomous command selected by your
+   * {@link RobotContainer} class.
+   */
   @Override
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
@@ -105,22 +107,21 @@ public class Robot extends TimedRobot
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
-
+  public void testPeriodic() {
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
   public void simulationInit() {
-   
+
   }
 
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {
-      m_robotContainer.SimPeriodic();
-      m_field.setRobotPose(m_robotContainer.GetPoseMeters());
+    m_robotContainer.SimPeriodic();
+    m_field.setRobotPose(m_robotContainer.GetPoseMeters());
 
   }
 
 }
-  

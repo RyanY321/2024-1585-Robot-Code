@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class IO extends SubsystemBase {
 
   // modify to correct button mapping
-  private final int LowShootButton = 1; // xbox controller A
-  private final int HighShootButton = 4; // Xbox Controller Y
-  private final int ReverseShooterButton = 5; // Xbox Controller Left Bumper
-  private final int LiftButton = 3; // Xbox Controller X
-  private final int LowerButton = 2; //Xbox Controller B
+  private final int LowLaunchButton = 1; // xbox controller A
+  private final int HighLaunchButton = 4; // Xbox Controller Y
+  private final int ReverseLauncherButton = 5; // Xbox Controller Left Bumper
+  private final int LiftLauncherButton = 3; // Xbox Controller X
+  private final int LowerLauncherButton = 2; // Xbox Controller B
 
   private CommandJoystick m_joystickController = new CommandJoystick(0);
   private CommandXboxController m_controller = new CommandXboxController(1);
@@ -36,31 +36,28 @@ public class IO extends SubsystemBase {
    * @return double
    */
   public double GetY() {
-    // return m_controller.getLeftY();
     System.out.println(m_joystickController.getY());
     return m_joystickController.getY();
   }
 
-  // raising/lowering the arm
-
-  public Trigger GetReverseShooterBtn() {
-    return m_controller.button(ReverseShooterButton);
+  public Trigger GetReverseLauncherBtn() {
+    return m_controller.button(ReverseLauncherButton);
   }
 
-  public Trigger GetLowShootBtn() {
-    return m_controller.button(LowShootButton);
+  public Trigger GetLowLaunchBtn() {
+    return m_controller.button(LowLaunchButton);
   }
 
-  public Trigger GetHighShootBtn() {
-    return m_controller.button(HighShootButton);
+  public Trigger GetHighLaunchBtn() {
+    return m_controller.button(HighLaunchButton);
   }
 
-  public Trigger GetLiftBtn() {
-    return m_controller.button(LiftButton);
+  public Trigger GetLiftLauncherBtn() {
+    return m_controller.button(LiftLauncherButton);
   }
 
-  public Trigger GetLowerBtn() {
-    return m_controller.button(LowerButton);
+  public Trigger GetLowerLauncherBtn() {
+    return m_controller.button(LowerLauncherButton);
   }
 
   @Override

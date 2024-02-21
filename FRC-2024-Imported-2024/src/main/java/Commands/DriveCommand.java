@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class DriveCommand extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final Drive m_driveSubsystem;
   private final IO m_controller;
-  
+
   private boolean isFinished = false;
 
   /**
@@ -23,7 +23,7 @@ public class DriveCommand extends Command {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSubsystem);
-   // addRequirements(controller);
+    // addRequirements(controller);
   }
 
   // Called when the command is initially scheduled.
@@ -38,11 +38,11 @@ public class DriveCommand extends Command {
     m_driveSubsystem.MoveArcade(-m_controller.GetY(), -m_controller.GetX());
     isFinished = true;
   }
-  
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

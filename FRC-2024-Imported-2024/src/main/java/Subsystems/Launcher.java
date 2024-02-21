@@ -44,7 +44,7 @@ public class Launcher extends SubsystemBase {
     }
 
     public void Launch(double speed) {
-        System.out.System.err.println("Turning On The Launcher...");
+        System.out.println("Turning On The Launcher...");
         m_frontMotor.set(speed);
         Commands.waitSeconds(1.5);
         m_backMotor.set(speed);

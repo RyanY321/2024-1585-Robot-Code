@@ -108,6 +108,8 @@ public class RobotContainer {
         // Engange the robot drive with given speeds
         new DriveAutoCommand(m_driveController, -leftAutoSpeed, -rightAutoSpeed),
 
+        new DriveAutoCommand(m_driveController, frontLaunchMotorSpeed, backLaunchMotorSpeed),
+        new WaitCommand(1.5),
         // Drive robot for 7.6 seconds
         new WaitCommand(6.0),
 

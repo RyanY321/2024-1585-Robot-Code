@@ -40,18 +40,31 @@ public class LauncherCommand extends Command {
     }
 
     private void CheckButtons() {
+        if (m_controller.GetYBool()) {
+            m_LauncherSubsystem.Launch(1.00);
+        }
+
+        else if (m_controller.GetABool()) {
+            m_LauncherSubsystem.Launch(0.50);
+        }
+
+        else if (m_controller.GetLeftBumper()) {
+            m_LauncherSubsystem.Launch(-0.30);
+        } else {
+            m_LauncherSubsystem.Launch(0.00);
+        }
+
         if (!m_LauncherSubsystem.m_lifterStopped) {
             if (m_controller.GetB()) {
                 // call function to Lower the launcher
-                m_LauncherSubsystem.LiftLauncher(-0.2);
+                m_LauncherSubsystem.LiftLauncher(-0.40);
             }
 
             else if (m_controller.GetXBool()) {
                 // Call function to raise the launcher
-                m_LauncherSubsystem.LiftLauncher(0.5);
-            }
-            else {
-                m_LauncherSubsystem.LiftLauncher(0);
+                m_LauncherSubsystem.LiftLauncher(0.40);
+            } else {
+                m_LauncherSubsystem.LiftLauncher(0.00);
             }
         }
     }

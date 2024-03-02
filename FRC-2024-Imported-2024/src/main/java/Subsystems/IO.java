@@ -50,6 +50,21 @@ public class IO extends SubsystemBase {
         return m_controller.button(LowerLauncherButton).getAsBoolean();
   }
 
+  public boolean GetABool()
+  {
+    return m_controller.button(LowLaunchButton).getAsBoolean();
+  }
+
+  public boolean GetYBool()
+  {
+    return m_controller.button(HighLaunchButton).getAsBoolean();
+  }
+
+  public boolean GetLeftBumper()
+  {
+    return m_controller.button(ReverseLauncherButton).getAsBoolean();
+  }
+
   public Trigger GetReverseLauncherBtn() {
     return m_controller.button(ReverseLauncherButton);
   }

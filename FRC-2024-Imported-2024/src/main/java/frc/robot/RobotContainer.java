@@ -123,16 +123,16 @@ public class RobotContainer {
   private void configureBindings() {
 
     // High Launcher Power Button
-    m_controller.GetHighLaunchBtn().whileTrue(m_launcher.LaunchCommand(1.00));
-    m_controller.GetHighLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
+    // m_controller.GetHighLaunchBtn().whileTrue(m_launcher.LaunchCommand(1.00));
+    // m_controller.GetHighLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
 
-    // Low Launcher Power Button
-    m_controller.GetLowLaunchBtn().whileTrue(m_launcher.LaunchCommand(0.50));
-    m_controller.GetLowLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
+    // // Low Launcher Power Button
+    // m_controller.GetLowLaunchBtn().whileTrue(m_launcher.LaunchCommand(0.50));
+    // m_controller.GetLowLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
 
-    // Reverse The Launcher Button
-    m_controller.GetReverseLauncherBtn().whileTrue(m_launcher.LaunchCommand(-0.30));
-    m_controller.GetReverseLauncherBtn().whileFalse(m_launcher.LaunchCommand(0.00));
+    // // Reverse The Launcher Button
+    // m_controller.GetReverseLauncherBtn().whileTrue(m_launcher.LaunchCommand(-0.30));
+    // m_controller.GetReverseLauncherBtn().whileFalse(m_launcher.LaunchCommand(0.00));
 
     // Lift The Launcher Button
     // m_controller.GetLiftLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(0.40));

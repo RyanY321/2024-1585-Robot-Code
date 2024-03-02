@@ -1,10 +1,14 @@
 package Subsystems;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Gyro extends SubsystemBase {
     private final ADXRS450_Gyro m_gyro;
+    private final AnalogGyro m_launcherAngleGyro;
     private double m_heading = 0.0;
 
     public double GetStartHeading() {
@@ -13,11 +17,19 @@ public class Gyro extends SubsystemBase {
 
     public Gyro() {
         m_gyro = new ADXRS450_Gyro();
+
+        m_launcherAngleGyro = new AnalogGyro(0);
+
         m_heading = m_gyro.getAngle();
     }
 
     public ADXRS450_Gyro GetGyro() {
         return m_gyro;
+    }
+
+    public AnalogGyro GetLauncherAngleGyro()
+    {
+        return m_launcherAngleGyro;
     }
 
     @Override

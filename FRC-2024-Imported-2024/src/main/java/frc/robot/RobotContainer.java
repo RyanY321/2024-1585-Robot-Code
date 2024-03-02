@@ -78,6 +78,8 @@ public class RobotContainer {
 
     // Schedule the drive controller to move
     m_driveController.setDefaultCommand(m_DriveCommand);
+
+    //Schedule the launcher
     m_launcher.setDefaultCommand((m_LauncherCommand));
 
     // --- Simulator variable setup ----///
@@ -133,12 +135,12 @@ public class RobotContainer {
     m_controller.GetReverseLauncherBtn().whileFalse(m_launcher.LaunchCommand(0.00));
 
     // Lift The Launcher Button
-    m_controller.GetLiftLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(0.50));
-    m_controller.GetLiftLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
+    // m_controller.GetLiftLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(0.40));
+    // m_controller.GetLiftLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
 
     // Lower The Launcher Button
-    m_controller.GetLowerLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(-0.30));
-    m_controller.GetLowerLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
+    // m_controller.GetLowerLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(-0.40));
+    // m_controller.GetLowerLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
   }
 
   /**

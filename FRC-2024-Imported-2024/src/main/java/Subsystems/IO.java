@@ -27,17 +27,27 @@ public class IO extends SubsystemBase {
    */
   public double GetX() {
     // return m_controller.getLeftX();
-    System.out.println(m_joystickController.getX());
+    // System.out.println(m_joystickController.getX());
     return m_joystickController.getX();
   }
 
   /**
-   * @details get the Controllers y axis valu
+   * @details get the Controllers y axis value
    * @return double
    */
   public double GetY() {
-    System.out.println(m_joystickController.getY());
+    // System.out.println(m_joystickController.getY());
     return m_joystickController.getY();
+  }
+
+  public boolean GetB()
+  {
+    return m_controller.button(LiftLauncherButton).getAsBoolean();
+  }
+
+  public boolean GetXBool()
+  {
+        return m_controller.button(LowerLauncherButton).getAsBoolean();
   }
 
   public Trigger GetReverseLauncherBtn() {
@@ -59,6 +69,7 @@ public class IO extends SubsystemBase {
   public Trigger GetLowerLauncherBtn() {
     return m_controller.button(LowerLauncherButton);
   }
+
 
   @Override
 

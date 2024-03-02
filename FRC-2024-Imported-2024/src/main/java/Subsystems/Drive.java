@@ -50,6 +50,7 @@ public class Drive extends SubsystemBase {
     public void MoveTank(double leftSpeed, double rightSpeed) {
         double error = m_gyro.GetStartHeading() - m_gyro.GetGyro().getAngle();
         // m_driveController.tankDrive(leftSpeed, rightSpeed);
+        // On the base the left and right sides are inverted, LeftSpeed means RightSpeed, RightSpeed means LeftSpeed
         m_driveController.tankDrive(leftSpeed + kP * error, rightSpeed - kP * error);
     }
 

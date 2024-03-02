@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Program Two", programTwoAuto);
 
     Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
+    Shuffleboard.getTab("Launcher Heading").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
 
     // Used for robot SIM
     m_field = new Field2d();

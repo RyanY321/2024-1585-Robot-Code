@@ -1,12 +1,9 @@
 package Subsystems;
 
-import java.util.concurrent.TimeUnit;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Launcher extends SubsystemBase {
@@ -28,10 +25,10 @@ public class Launcher extends SubsystemBase {
         m_lifterStop1 = new DigitalInput(1);
     }
 
-    public Command AutoLaunchCommand(double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
+    public Command AutoLaunchCommand(double frontLaunchMotorAutoSpeed, double backLaunchMotorAutoSpeed, double spoolMotorAutoSpeed) {
         return run(
                 () -> {
-                    this.AutoLaunch(frontLaunchMotorSpeed, backLaunchMotorSpeed);
+                    this.AutoLaunch(frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed, spoolMotorAutoSpeed);
                 });
     }
 
@@ -64,9 +61,10 @@ public class Launcher extends SubsystemBase {
         m_backMotor.set(launchSpeed);
     }
 
-    public void AutoLaunch(double FrontMotorSpeed, double BackMotorSpeed) {
-        m_frontMotor.set(FrontMotorSpeed);
-        m_backMotor.set(BackMotorSpeed);
+    public void AutoLaunch(double FrontMotorAutoSpeed, double BackMotorAutoSpeed, double SpoolMotorAutoSpeed) {
+        m_frontMotor.set(FrontMotorAutoSpeed);
+        m_backMotor.set(BackMotorAutoSpeed);
+        m_spoolMotor.set(SpoolMotorAutoSpeed);
     }
 
     public void periodic() {

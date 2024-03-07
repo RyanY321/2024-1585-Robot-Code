@@ -2,7 +2,6 @@ package Commands;
 
 import Subsystems.Launcher;
 import Subsystems.IO;
-import edu.wpi.first.math.proto.Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class LauncherCommand extends Command {
@@ -42,11 +41,11 @@ public class LauncherCommand extends Command {
     }
 
     private void CheckButtons() {
-        if (m_controller.GetYBool()) {
+        if (m_controller.GetButtonY()) {
             m_LauncherSubsystem.Launch(1.00, 0.10);
         }
 
-        else if (m_controller.GetABool()) {
+        else if (m_controller.GetButtonA()) {
             m_LauncherSubsystem.Launch(0.50, 0.10);
         }
 
@@ -57,12 +56,12 @@ public class LauncherCommand extends Command {
         }
 
         if (!m_LauncherSubsystem.m_lifterStopped) {
-            if (m_controller.GetB()) {
+            if (m_controller.GetButtonB()) {
                 // call function to Lower the launcher
                 m_LauncherSubsystem.LiftLauncher(-0.40);
             }
 
-            else if (m_controller.GetXBool()) {
+            else if (m_controller.GetButtonX()) {
                 // Call function to raise the launcher
                 m_LauncherSubsystem.LiftLauncher(0.40);
             } else {

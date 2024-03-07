@@ -41,8 +41,8 @@ public class RobotContainer {
 
   private double rightAutoSpeed = .70;
   private double leftAutoSpeed = rightAutoSpeed * .98;
-  private double frontLaunchMotorSpeed = 0.10;
-  private double backLaunchMotorSpeed = 0.10;
+  private double frontLaunchMotorAutoSpeed = 0.10;
+  private double backLaunchMotorAutoSpeed = 0.10;
 
   // -------Simulator Variables -----///
   private AnalogGyro gyro;
@@ -106,11 +106,9 @@ public class RobotContainer {
     // ------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
         // Engage the launcher to the given speeds
-        new LauncherAutoCommand(m_launcher, frontLaunchMotorSpeed, backLaunchMotorSpeed),
+        new LauncherAutoCommand(m_launcher, frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed),
         // Engange the robot drive with given speeds
         new DriveAutoCommand(m_driveController, -leftAutoSpeed, -rightAutoSpeed),
-
-        new DriveAutoCommand(m_driveController, frontLaunchMotorSpeed, backLaunchMotorSpeed),
         new WaitCommand(1.5),
         // Drive robot for 7.6 seconds
         new WaitCommand(6.0),

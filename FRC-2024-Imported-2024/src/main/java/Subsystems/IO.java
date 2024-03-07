@@ -40,22 +40,22 @@ public class IO extends SubsystemBase {
     return m_joystickController.getY();
   }
 
-  public boolean GetB()
+  public boolean GetButtonB()
   {
     return m_controller.button(LiftLauncherButton).getAsBoolean();
   }
 
-  public boolean GetXBool()
+  public boolean GetButtonX()
   {
         return m_controller.button(LowerLauncherButton).getAsBoolean();
   }
 
-  public boolean GetABool()
+  public boolean GetButtonA()
   {
     return m_controller.button(LowLaunchButton).getAsBoolean();
   }
 
-  public boolean GetYBool()
+  public boolean GetButtonY()
   {
     return m_controller.button(HighLaunchButton).getAsBoolean();
   }

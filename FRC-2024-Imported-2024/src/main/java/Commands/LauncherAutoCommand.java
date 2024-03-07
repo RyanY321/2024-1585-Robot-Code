@@ -10,11 +10,13 @@ public class LauncherAutoCommand extends Command {
     private boolean m_isFinished = false;
     private double m_FrontMotorSpeed;
     private double m_BackMotorSpeed;
+    private double m_spoolMotorSpeed;
 
-    public LauncherAutoCommand(Launcher launcherSubsystem, double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
+    public LauncherAutoCommand(Launcher launcherSubsystem, double frontLaunchMotorAutoSpeed, double backLaunchMotorAutoSpeed, double spoolMotorAutoSpeed) {
         m_LauncherSubsystem = launcherSubsystem;
-        m_FrontMotorSpeed = frontLaunchMotorSpeed;
-        m_BackMotorSpeed = backLaunchMotorSpeed;
+        m_FrontMotorSpeed = frontLaunchMotorAutoSpeed;
+        m_BackMotorSpeed = backLaunchMotorAutoSpeed;
+        m_spoolMotorSpeed = spoolMotorAutoSpeed;
         addRequirements(launcherSubsystem);
     }
 
@@ -27,7 +29,7 @@ public class LauncherAutoCommand extends Command {
     public void execute() {
         if (m_launch = true) {
             System.out.println("Engaging The Auto Launcher...");
-            m_LauncherSubsystem.AutoLaunch(m_FrontMotorSpeed, m_BackMotorSpeed);
+            m_LauncherSubsystem.AutoLaunch(m_FrontMotorSpeed, m_BackMotorSpeed, m_spoolMotorSpeed);
             m_isFinished = true;
         }
     }

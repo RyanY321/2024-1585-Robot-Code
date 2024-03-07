@@ -30,7 +30,7 @@ public class RobotContainer {
   private IO m_controller = new IO();
   public Gyro m_gyro = new Gyro();
   private Drive m_driveController = new Drive(m_gyro, 0, 1);
-  private Launcher m_launcher = new Launcher(2, 3, 4);
+  private Launcher m_launcher = new Launcher(2, 3, 4, 5);
   private LauncherCommand m_LauncherCommand = new LauncherCommand(m_launcher, m_controller);
   private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 

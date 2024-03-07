@@ -15,6 +15,8 @@ public class LauncherCommand extends Command {
     // Controlller Buttons
     // Y = high speed
     // A = Low speed
+    // X = Raise Launcher
+    // Y = Lower Launcher
     // LeftBumper = reverse
 
     public LauncherCommand(Launcher launcherSubsystem, IO controller) {
@@ -41,17 +43,17 @@ public class LauncherCommand extends Command {
 
     private void CheckButtons() {
         if (m_controller.GetYBool()) {
-            m_LauncherSubsystem.Launch(1.00);
+            m_LauncherSubsystem.Launch(1.00, 0.10);
         }
 
         else if (m_controller.GetABool()) {
-            m_LauncherSubsystem.Launch(0.50);
+            m_LauncherSubsystem.Launch(0.50, 0.10);
         }
 
         else if (m_controller.GetLeftBumper()) {
-            m_LauncherSubsystem.Launch(-0.30);
+            m_LauncherSubsystem.Launch(-0.30, -0.10);
         } else {
-            m_LauncherSubsystem.Launch(0.00);
+            m_LauncherSubsystem.Launch(0.00, 0.00);
         }
 
         if (!m_LauncherSubsystem.m_lifterStopped) {

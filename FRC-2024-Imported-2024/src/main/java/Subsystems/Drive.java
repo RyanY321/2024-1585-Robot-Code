@@ -1,29 +1,43 @@
 package Subsystems;
 
+import com.revrobotics.CANSparkLowLevel;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+// import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import com.revrobotics.CANSparkMax;
+// import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
 
     private DifferentialDrive m_driveController;
-    private final PWMSparkMax m_leftMotor;
-    private final PWMSparkMax m_rightMotor;
+    private final CANSparkMax m_leftMotorA;
+    private final CANSparkMax m_leftMotorB;
+    private final CANSparkMax m_rightMotorA;
+    private final CANSparkMax m_rightMotorB;
     private final Gyro m_gyro;
     private double kP = 1;
 
-    public Drive(Gyro gyro, int leftMotorChannel, int rightMotorChannel) {
+    public Drive(Gyro gyro) {
         m_gyro = gyro;
-        m_leftMotor = new PWMSparkMax(leftMotorChannel);
-        m_rightMotor = new PWMSparkMax(rightMotorChannel);
-        m_driveController = new DifferentialDrive(m_leftMotor, m_rightMotor);
-        //
+        //m_leftMotor = new PWMSparkMax(leftMotorChannel);
+        m_leftMotorA = new CANSparkMax(1, CANSparkLowLevel.MotorType.kBrushed);
+        m_leftMotorB = new CANSparkMax(2, CANSparkLowLevel.MotorType.kBrushed);
+        m_rightMotorA = new CANSparkMax(3, CANSparkLowLevel.MotorType.kBrushed);
+        m_rightMotorB = new CANSparkMax(4, CANSparkLowLevel.MotorType.kBrushed);
+
+        m_leftMotorA.setInverted(true);
+        m_rightMotorA.setInverted(false);
+
+        m_leftMotorB.follow(m_leftMotorA);
+        m_rightMotorB.follow(m_rightMotorA);
+
+        //m_rightMotor = new PWMSparkMax(rightMotorChannel);
+        m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);
         m_driveController.setSafetyEnabled(false);
         m_driveController.setExpiration(0.1);
         m_driveController.setMaxOutput(1);
-        m_leftMotor.setInverted(true);
-        m_rightMotor.setInverted(false);
     }
 
     public Command moveArcadeCommand(double xSpeed, double zRotation) {
@@ -55,11 +69,11 @@ public class Drive extends SubsystemBase {
     }
 
     public double GetLeft() {
-        return m_leftMotor.get();
+        return m_leftMotorA.get();
     }
 
     public double GetRight() {
-        return m_rightMotor.get();
+        return m_rightMotorA.get();
     }
 
     @Override

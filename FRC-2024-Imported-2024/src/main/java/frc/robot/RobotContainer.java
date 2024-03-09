@@ -28,11 +28,12 @@ import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotWheelSiz
 
 public class RobotContainer {
   private IO m_controller = new IO();
-  public Gyro m_gyro = new Gyro();
-  private Drive m_driveController = new Drive(m_gyro, 0, 1);
-  private Launcher m_launcher = new Launcher(2, 3, 4, 5);
-  private LauncherCommand m_LauncherCommand = new LauncherCommand(m_launcher, m_controller);
-  private DriveCommand m_DriveCommand = new DriveCommand(m_driveController, m_controller);
+  public Gyro m_gyro;
+  private Drive m_driveController;
+  private Launcher m_launcher;
+
+  private LauncherCommand m_LauncherCommand;
+  private DriveCommand m_DriveCommand;
 
   // private Auto m_auto = new Auto(m_driveController);
 
@@ -46,7 +47,9 @@ public class RobotContainer {
 
   // -------Simulator Variables -----///
   private AnalogGyro gyro;
-  private AnalogGyroSim m_gyroSim = new AnalogGyroSim(0);
+  private AnalogGyro gyro2;
+  private AnalogGyroSim m_gyroSim; // = new AnalogGyroSim(0);
+  private AnalogGyroSim m_gyroSim2; // = new AnalogGyroSim(1);
 
   private Encoder leftEncoder;
   private Encoder rightEncoder;
@@ -56,12 +59,7 @@ public class RobotContainer {
   private static final double kWheelRadius = 0.0508; // meters
   private static final int kEncoderResolution = 4096;
 
-  private DifferentialDrivetrainSim m_driveSim = DifferentialDrivetrainSim.createKitbotSim(
-      KitbotMotor.kDoubleFalcon500PerSide, // 2 CIMs per side.
-      KitbotGearing.k10p71, // 10.71:1
-      KitbotWheelSize.kSixInch, // 6" diameter wheels.
-      null // No measurement noise.
-  );
+  private DifferentialDrivetrainSim m_driveSim;
 
   private DifferentialDriveOdometry m_odometry;
 
@@ -73,22 +71,49 @@ public class RobotContainer {
     // Configure the controller bindings
     configureBindings();
 
-    // Start camera server for teleop
-    CameraServer.startAutomaticCapture();
+    if (!Robot.isSimulation()) {
+      m_gyro = new Gyro();
+      // Located in Subsystems.Drive.Java 
+      // CAN ID 1 = Left Motor A
+      // CAN ID 2 = Left Motor B
+      // CAN ID 3 = Right Motor A
+      // CAN ID 4 = Right Motor B
+      m_driveController = new Drive(m_gyro);
+      // Front and Back Motors are in the PWM channels
+      // Lift and Feeder Motors are in the CAN channels
+      m_launcher = new Launcher(0, 1, 5, 6);
+      m_LauncherCommand = new LauncherCommand(m_launcher, m_controller);
+      m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
-    // Schedule the drive controller to move
-    m_driveController.setDefaultCommand(m_DriveCommand);
+      // Start camera server for teleop
+      // CameraServer.startAutomaticCapture();
 
-    //Schedule the launcher
-    m_launcher.setDefaultCommand((m_LauncherCommand));
+      // Schedule the drive controller to move
+      m_driveController.setDefaultCommand(m_DriveCommand);
+
+      // Schedule the launcher
+      m_launcher.setDefaultCommand((m_LauncherCommand));
+
+    }
 
     // --- Simulator variable setup ----///
     if (Robot.isSimulation()) {
+
+      m_driveSim = DifferentialDrivetrainSim.createKitbotSim(
+          KitbotMotor.kDoubleFalcon500PerSide, // 2 CIMs per side.
+          KitbotGearing.k10p71, // 10.71:1
+          KitbotWheelSize.kSixInch, // 6" diameter wheels.
+          null // No measurement noise.
+      );
+
       gyro = new AnalogGyro(0);
+      // gyro2 = new AnalogGyro(1);
       // m_simaddChild("gyro", gyro);
-      gyro.setSensitivity(0.007);
-      m_gyroSim = new AnalogGyroSim(gyro);
-      leftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+      // gyro.setSensitivity(0.007);
+      m_gyroSim = new AnalogGyroSim(0);
+
+      // m_gyroSim2 = new AnalogGyroSim(1);
+      leftEncoder = new Encoder(4, 5, false, EncodingType.k4X);
       rightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
       leftEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
       rightEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius / kEncoderResolution);
@@ -105,16 +130,18 @@ public class RobotContainer {
 
     // ------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
-        // Engage the launcher to the given speeds
-        new LauncherAutoCommand(m_launcher, frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed),
-        // Engange the robot drive with given speeds
-        new DriveAutoCommand(m_driveController, -leftAutoSpeed, -rightAutoSpeed),
-        new WaitCommand(1.5),
-        // Drive robot for 7.6 seconds
-        new WaitCommand(6.0),
+        // // Engage the launcher to the given speeds
+        // new LauncherAutoCommand(m_launcher, frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed,
+        //     backLaunchMotorAutoSpeed),
+        // // Engange the robot drive with given speeds
+        // new DriveAutoCommand(m_driveController, -leftAutoSpeed, -rightAutoSpeed),
+        new WaitCommand(1.5)
+        // // Drive robot for 7.6 seconds
+        // new WaitCommand(6.0),
 
-        // Stop the robot
-        new DriveAutoCommand(m_driveController, 0, 0));
+        // // Stop the robot
+        // new DriveAutoCommand(m_driveController, 0, 0));
+    );
   }
 
   // Configures all button mapping bindings for Xbox Controller

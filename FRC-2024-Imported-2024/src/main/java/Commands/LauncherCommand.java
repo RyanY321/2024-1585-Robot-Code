@@ -48,17 +48,19 @@ public class LauncherCommand extends Command {
 
     private void CheckButtons() {
         if (m_controller.GetButtonY()) {
-            m_LauncherSubsystem.Launch(1.00, 1.00, 0.50);
-        }
-
-        else if (m_controller.GetButtonA()) {
-            m_LauncherSubsystem.Launch(0.50, 0.50, 0.50);
+            m_LauncherSubsystem.Launch(-1.00, -1.00);
         }
 
         else if (m_controller.GetLeftBumper()) {
-            m_LauncherSubsystem.Launch(-0.30, -0.30, -0.10);
+            m_LauncherSubsystem.Reverse();
         } else {
-            m_LauncherSubsystem.Launch(0.00, 0.00, 0.00);
+            m_LauncherSubsystem.Launch(0.00, 0.00);
+        }
+
+        if (m_controller.GetButtonA()) {
+            m_LauncherSubsystem.Feeder(1.00);
+        } else {
+            m_LauncherSubsystem.Feeder(0.00);
         }
 
         if (!m_LauncherSubsystem.m_lifterStopped) {
@@ -86,10 +88,9 @@ public class LauncherCommand extends Command {
     private void CheckDeadStop() {
         if (m_LauncherSubsystem.m_lifterStop0 != null && m_LauncherSubsystem.m_lifterStop1 != null) {
 
-            System.out.println("checking stops");
+            // System.out.println("checking stops");
             stopLifter0 = m_LauncherSubsystem.m_lifterStop0.get();
             stopLifter1 = m_LauncherSubsystem.m_lifterStop1.get();
-
 
             // Debugger, uncomment for debugging
             // =======================================================
@@ -101,53 +102,47 @@ public class LauncherCommand extends Command {
             // False is when the switch is depressed
             if (stopLifter0 == false || stopLifter1 == false) {
                 // Stops the lifting motor
-                    m_LauncherSubsystem.m_liftMotor.stopMotor();
-                    //liftStopped = true;
+                m_LauncherSubsystem.m_liftMotor.stopMotor();
+                // liftStopped = true;
 
                 // if(!liftStopped)
                 // {
-                //     m_LauncherSubsystem.m_liftMotor.stopMotor();
-                //     liftStopped = true;
+                // m_LauncherSubsystem.m_liftMotor.stopMotor();
+                // liftStopped = true;
                 // }
                 // else
                 // {
-                 
-                //     //If back stop triggered
-                //     if(!stopLifter0)
-                //     {
-                //         m_LauncherSubsystem.m_liftMotor.set(.25);
-                //     }
 
-                //     if(!stopLifter1)
-                //     {
-                //         m_LauncherSubsystem.m_liftMotor.set(-.25);
-                //     }
+                // //If back stop triggered
+                // if(!stopLifter0)
+                // {
+                // m_LauncherSubsystem.m_liftMotor.set(.25);
                 // }
 
+                // if(!stopLifter1)
+                // {
+                // m_LauncherSubsystem.m_liftMotor.set(-.25);
+                // }
+                // }
 
-                //new WaitCommand(3.0);
-                //_LauncherSubsystem.m_liftMotor.set(-0.10);
-                //new WaitCommand(1.5);
-                //m_LauncherSubsystem.m_liftMotor.stopMotor();
-                //System.out.println("Lifter Motor Stopped...");
-               // m_LauncherSubsystem.m_lifterStopped = true;
-            } 
-            else if((stopLifter0 && stopLifter1) && liftStopped)
-            {
+                // new WaitCommand(3.0);
+                // _LauncherSubsystem.m_liftMotor.set(-0.10);
+                // new WaitCommand(1.5);
+                // m_LauncherSubsystem.m_liftMotor.stopMotor();
+                // System.out.println("Lifter Motor Stopped...");
+                // m_LauncherSubsystem.m_lifterStopped = true;
+            } else if ((stopLifter0 && stopLifter1) && liftStopped) {
                 m_LauncherSubsystem.m_liftMotor.stopMotor();
-                //liftStopped = false;
+                // liftStopped = false;
             }
-            
-            // else if (stopLifter0 == true && stopLifter1 == true) {
-            //     m_LauncherSubsystem.m_lifterStopped = false;
-            // }
 
+            // else if (stopLifter0 == true && stopLifter1 == true) {
+            // m_LauncherSubsystem.m_lifterStopped = false;
+            // }
 
         }
 
     }
-
-
 
     public void end(boolean interrupted) {
     }

@@ -4,15 +4,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Launcher extends SubsystemBase {
     // PWM SPARK MAX
-    private final PWMSparkMax m_frontMotor;
-    private final PWMSparkMax m_backMotor;
+    private final Talon m_frontMotor;
+    private final Talon m_backMotor;
 
     // CAN SPARK MAX
     private final CANSparkMax m_feederMotor;
@@ -25,8 +24,8 @@ public class Launcher extends SubsystemBase {
 
     public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int LiftMotorChannelCAN, int FeederMotorChannelCAN) {
         // PWM SPARK MAX
-        m_frontMotor = new PWMSparkMax(FrontLaunchMotorChannelPWM);
-        m_backMotor = new PWMSparkMax(BackLaunchMotorChannelPWM);
+        m_frontMotor = new Talon(FrontLaunchMotorChannelPWM);
+        m_backMotor = new Talon(BackLaunchMotorChannelPWM);
 
         // CAN SPARK MAX
         m_liftMotor = new CANSparkMax(LiftMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
@@ -53,10 +52,25 @@ public class Launcher extends SubsystemBase {
                 });
     }
 
-    public Command LaunchCommand(double frontLaunchMotorSpeed, double backLaunchMotorSpeed, double feedMotorSpeed) {
+    public Command LaunchCommand(double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
         return run(
                 () -> {
-                    this.Launch(frontLaunchMotorSpeed, backLaunchMotorSpeed, feedMotorSpeed);
+                    this.Launch(frontLaunchMotorSpeed, backLaunchMotorSpeed);
+                });
+    }
+
+    public Command ReverseCommand() {
+        return run(
+                () -> {
+                    this.Reverse();
+                });
+
+    }
+
+    public Command LaunchCommand(double feederMotorSpeed) {
+        return run(
+                () -> {
+                    this.Feeder(feederMotorSpeed);
                 });
     }
 
@@ -68,6 +82,12 @@ public class Launcher extends SubsystemBase {
 
     }
 
+    public void Reverse() {
+        m_frontMotor.set(0.30);
+        m_backMotor.set(0.30);
+        m_feederMotor.set(-0.60);
+    }
+
     public void LiftLauncher(double liftMotorSpeed) {
         // System.out.println(m_lifterStopped);
         if (!m_lifterStopped) {
@@ -76,10 +96,13 @@ public class Launcher extends SubsystemBase {
         }
     }
 
-    public void Launch(double frontLaunchMotorSpeed, double backLaunchMotorSpeed, double feedMotorSpeed) {
-        m_feederMotor.set(feedMotorSpeed);
+    public void Launch(double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
         m_frontMotor.set(frontLaunchMotorSpeed);
         m_backMotor.set(backLaunchMotorSpeed);
+    }
+
+    public void Feeder(double feederMotorSpeed) {
+        m_feederMotor.set(feederMotorSpeed);
     }
 
     public void AutoLaunch(double FrontMotorAutoSpeed, double BackMotorAutoSpeed, double FeederMotorAutoSpeed) {

@@ -81,7 +81,7 @@ public class RobotContainer {
       m_driveController = new Drive(m_gyro);
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
-      m_launcher = new Launcher(0, 1, 5, 6);
+      m_launcher = new Launcher(5, 3, 5, 6);
       m_LauncherCommand = new LauncherCommand(m_launcher, m_controller);
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 

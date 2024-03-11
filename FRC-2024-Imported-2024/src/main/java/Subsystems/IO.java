@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class IO extends SubsystemBase {
 
   // modify to correct button mapping
-  private final int LowLaunchButton = 1; // xbox controller A
+  private final int FeederButton = 1; // xbox controller A
   private final int HighLaunchButton = 4; // Xbox Controller Y
   private final int ReverseLauncherButton = 5; // Xbox Controller Left Bumper
   private final int LiftLauncherButton = 3; // Xbox Controller X
@@ -52,7 +52,7 @@ public class IO extends SubsystemBase {
 
   public boolean GetButtonA()
   {
-    return m_controller.button(LowLaunchButton).getAsBoolean();
+    return m_controller.button(FeederButton).getAsBoolean();
   }
 
   public boolean GetButtonY()
@@ -65,12 +65,22 @@ public class IO extends SubsystemBase {
     return m_controller.button(ReverseLauncherButton).getAsBoolean();
   }
 
+  public double GetFeederReverseValue()
+  {
+    return m_controller.getLeftTriggerAxis();
+  }
+
+  public double GetFeederForwardValue()
+  {
+    return m_controller.getRightTriggerAxis();
+  }
+
   public Trigger GetReverseLauncherBtn() {
     return m_controller.button(ReverseLauncherButton);
   }
 
-  public Trigger GetLowLaunchBtn() {
-    return m_controller.button(LowLaunchButton);
+  public Trigger GetFeederBtn() {
+    return m_controller.button(FeederButton);
   }
 
   public Trigger GetHighLaunchBtn() {

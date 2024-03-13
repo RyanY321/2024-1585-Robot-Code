@@ -86,7 +86,7 @@ public class RobotContainer {
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
       // Start camera server for teleop
-      // CameraServer.startAutomaticCapture();
+      CameraServer.startAutomaticCapture();
 
       // Schedule the drive controller to move
       m_driveController.setDefaultCommand(m_DriveCommand);

@@ -48,7 +48,7 @@ public class LauncherCommand extends Command {
 
     private void CheckButtons() {
         if (m_controller.GetButtonY()) {
-            m_LauncherSubsystem.Launch(-1.00, -1.00);
+            m_LauncherSubsystem.Launch(1.00, 1.00);
         }
 
         else if (m_controller.GetLeftBumper()) {

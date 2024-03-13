@@ -45,7 +45,7 @@ public class DriveAutoCommand extends Command {
   public void end(boolean interrupted) {
     if (interrupted) {
       System.out.println("Auto Motors stopped");
-      m_driveSubsystem.MoveTank(0, 0);
+      m_driveSubsystem.MoveTank(0, -0);
     }
   }
 

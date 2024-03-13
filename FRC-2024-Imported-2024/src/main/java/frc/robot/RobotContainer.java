@@ -81,7 +81,7 @@ public class RobotContainer {
       m_driveController = new Drive(m_gyro);
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
-      m_launcher = new Launcher(5, 3, 5, 6);
+      m_launcher = new Launcher(0, 1, 5, 6);
       m_LauncherCommand = new LauncherCommand(m_launcher, m_controller);
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);
 
@@ -130,17 +130,9 @@ public class RobotContainer {
 
     // ------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
-        // // Engage the launcher to the given speeds
-        // new LauncherAutoCommand(m_launcher, frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed,
-        //     backLaunchMotorAutoSpeed),
-        // // Engange the robot drive with given speeds
-        // new DriveAutoCommand(m_driveController, -leftAutoSpeed, -rightAutoSpeed),
-        new WaitCommand(1.5)
-        // // Drive robot for 7.6 seconds
-        // new WaitCommand(6.0),
-
-        // // Stop the robot
-        // new DriveAutoCommand(m_driveController, 0, 0));
+      new DriveAutoCommand(m_driveController, -0.50, -0.50),
+      new WaitCommand(3.0),
+      new DriveAutoCommand(m_driveController, 0.00, 0.00)
     );
   }
 

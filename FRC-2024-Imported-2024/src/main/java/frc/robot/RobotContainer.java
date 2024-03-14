@@ -9,6 +9,7 @@ import Commands.DriveCommand;
 import Commands.LauncherAutoCommand;
 import Commands.LauncherCommand;
 import Commands.DriveAutoCommand;
+import Commands.LifterAutoCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -39,6 +40,7 @@ public class RobotContainer {
 
   private SequentialCommandGroup m_progOneAuto = new SequentialCommandGroup();
   private SequentialCommandGroup m_progTwoAuto = new SequentialCommandGroup();
+  private SequentialCommandGroup m_progThreeAuto = new SequentialCommandGroup();
 
   private double rightAutoSpeed = .70;
   private double leftAutoSpeed = rightAutoSpeed * .98;
@@ -131,13 +133,40 @@ public class RobotContainer {
     // ------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
       new DriveAutoCommand(m_driveController, -0.50, -0.50),
-      new WaitCommand(3.0),
+      new WaitCommand(2.0),
       new DriveAutoCommand(m_driveController, 0.00, 0.00)
     );
 
     m_progTwoAuto.addCommands(
+      new LifterAutoCommand(m_launcher, -0.30),
+      new WaitCommand(1.2),
+      new LifterAutoCommand(m_launcher, -0.08),
+      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),
+      new WaitCommand(1.2),
+      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 1.00),
+      new WaitCommand(1.5),
+      new LauncherAutoCommand(m_launcher, 0.00, 0.00, 0.00),
+      new WaitCommand(1.0),
+      new LifterAutoCommand(m_launcher, 0.08),
+      new LifterAutoCommand(m_launcher, 0.00),
       new DriveAutoCommand(m_driveController, -0.50, -0.50),
-      new WaitCommand(2.5),
+      new WaitCommand(2.0),
+      new DriveAutoCommand(m_driveController, 0.00, 0.00)
+    );
+    m_progThreeAuto.addCommands(
+      new LifterAutoCommand(m_launcher, -0.30),
+      new WaitCommand(1.2),
+      new LifterAutoCommand(m_launcher, -0.08),
+      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),
+      new WaitCommand(1.2),
+      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 1.00),
+      new WaitCommand(1.5),
+      new LauncherAutoCommand(m_launcher, 0.00, 0.00, 0.00),
+      new WaitCommand(1.0),
+      new LifterAutoCommand(m_launcher, 0.08),
+      new LifterAutoCommand(m_launcher, 0.00),
+      new DriveAutoCommand(m_driveController, -0.40, -0.60),
+      new WaitCommand(4.0),
       new DriveAutoCommand(m_driveController, 0.00, 0.00)
     );
   }
@@ -148,7 +177,6 @@ public class RobotContainer {
     // High Launcher Power Button
     // m_controller.GetHighLaunchBtn().whileTrue(m_launcher.LaunchCommand(1.00));
     // m_controller.GetHighLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
-
     // // Low Launcher Power Button
     // m_controller.GetLowLaunchBtn().whileTrue(m_launcher.LaunchCommand(0.50));
     // m_controller.GetLowLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
@@ -178,10 +206,12 @@ public class RobotContainer {
 
     switch(selectedAuto)
     {
-    case "Program One":
+    case Robot.programOneAuto:
     return m_progOneAuto;
-    case "Program Two":
+    case Robot.programTwoAuto:
     return m_progTwoAuto;
+    case  Robot.programThreeAuto:
+    return m_progThreeAuto;
     default:
     return m_progOneAuto;
 

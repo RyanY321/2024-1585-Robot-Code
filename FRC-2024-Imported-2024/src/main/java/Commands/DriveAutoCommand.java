@@ -36,7 +36,7 @@ public class DriveAutoCommand extends Command {
   @Override
   public void execute() {
     System.out.println(String.format("Moving Auto : Move :  %f %f", m_leftSpeed, m_rightSpeed));
-    m_driveSubsystem.MoveTank(m_leftSpeed, m_rightSpeed);
+    m_driveSubsystem.MoveTankAuto(m_leftSpeed, m_rightSpeed);
     m_isFinished = true;
   }
 
@@ -45,7 +45,7 @@ public class DriveAutoCommand extends Command {
   public void end(boolean interrupted) {
     if (interrupted) {
       System.out.println("Auto Motors stopped");
-      m_driveSubsystem.MoveTank(0, 0);
+      m_driveSubsystem.MoveTankAuto(0, 0);
     }
   }
 

@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 public class Drive extends SubsystemBase {
 
@@ -62,10 +63,16 @@ public class Drive extends SubsystemBase {
     }
 
     public void MoveTank(double leftSpeed, double rightSpeed) {
+
         double error = m_gyro.GetStartHeading() - m_gyro.GetGyro().getAngle();
         // m_driveController.tankDrive(leftSpeed, rightSpeed);
         // On the base the left and right sides are inverted, LeftSpeed means RightSpeed, RightSpeed means LeftSpeed
         m_driveController.tankDrive(leftSpeed + kP * error, rightSpeed - kP * error);
+    }
+
+    public void MoveTankAuto(double leftSpeed, double rightSpeed)
+    {
+        m_driveController.tankDrive(leftSpeed, rightSpeed);
     }
 
     public double GetLeft() {

@@ -3,21 +3,16 @@ package Commands;
 import Subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class LauncherAutoCommand extends Command {
+public class LifterAutoCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final Launcher m_LauncherSubsystem;
     private boolean m_launch = false;
     private boolean m_isFinished = false;
-    private double m_FrontMotorSpeed;
-    private double m_BackMotorSpeed;
-    private double m_feederMotorSpeed;
+    private double m_lifterSpeed = 0.0;
 
-    public LauncherAutoCommand(Launcher launcherSubsystem, double frontLaunchMotorAutoSpeed,
-            double backLaunchMotorAutoSpeed, double feederMotorAutoSpeed) {
+    public LifterAutoCommand(Launcher launcherSubsystem, double lifterSpeed) {
         m_LauncherSubsystem = launcherSubsystem;
-        m_FrontMotorSpeed = frontLaunchMotorAutoSpeed;
-        m_BackMotorSpeed = backLaunchMotorAutoSpeed;
-        m_feederMotorSpeed = feederMotorAutoSpeed;
+        m_lifterSpeed = lifterSpeed;
         addRequirements(launcherSubsystem);
     }
 
@@ -29,12 +24,13 @@ public class LauncherAutoCommand extends Command {
     @Override
     public void execute() {
         if (m_launch = true) {
-            System.out.println("Engaging The Auto Launcher...");
-            m_LauncherSubsystem.AutoLaunch(m_FrontMotorSpeed, m_BackMotorSpeed, m_feederMotorSpeed);
+            // System.out.println("Engaging The Auto Launcher...");
+            m_LauncherSubsystem.AutoLift(m_lifterSpeed);
             m_isFinished = true;
         }
     }
 
+    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         return m_isFinished;

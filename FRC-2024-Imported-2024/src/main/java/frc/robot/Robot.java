@@ -18,12 +18,17 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
-  private static final String programOneAuto = "Program One";
-  private static final String programTwoAuto = "Program Two";
+  public static final String programOneAuto = "Program One";
+  public static final String programTwoAuto = "Program Two";
+  public static final String programThreeAuto = "Program Three";
+  public static final String programFourAuto = "Program Four";
+  public static final String programFiveAuto = "Program Five";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   private Field2d m_field;
+
+  public boolean isAuto = false;
 
   /**
    * @implNote Robot Constructor 
@@ -35,18 +40,23 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Populates Autonoumous Dropdown Menu
-    m_chooser.setDefaultOption("Program One", programOneAuto);
-    m_chooser.addOption("Program Two", programTwoAuto);
+    m_chooser.setDefaultOption("Backup", programOneAuto);
+    m_chooser.addOption("Shoot, Backup", programTwoAuto);
+    m_chooser.addOption("Shoot, Left Backup", programThreeAuto);
 
     if (Robot.isReal()) {
-      Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetGyro());
-      Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
+      // Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetGyro());
+      // Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
+      SmartDashboard.putData("Robot Position", m_robotContainer.m_gyro.GetGyro());
+      SmartDashboard.putData("Launcher Posititon", m_robotContainer.m_gyro.GetLauncherAngleGyro());
     }
 
     // Used for robot SIM
     m_field = new Field2d();
     SmartDashboard.putData("Field", m_field);
-    Shuffleboard.getTab("Cresendo").add(m_chooser);
+    // Shuffleboard.getTab("Cresendo").add(m_chooser);
+    SmartDashboard.putData("Auto Selector", m_chooser);
+
   }
 
   @Override
@@ -79,6 +89,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand(m_autoSelected);

@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -24,7 +26,7 @@ public class Robot extends TimedRobot {
   private Field2d m_field;
 
   /**
-   * @implNote Robot Constructor
+   * @implNote Robot Constructor 
    */
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -37,13 +39,14 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Program Two", programTwoAuto);
 
     if (Robot.isReal()) {
-      Shuffleboard.getTab("Robot Heading").add(m_robotContainer.m_gyro.GetGyro());
-      Shuffleboard.getTab("Launcher Heading").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
+      Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetGyro());
+      Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
     }
 
     // Used for robot SIM
     m_field = new Field2d();
     SmartDashboard.putData("Field", m_field);
+    Shuffleboard.getTab("Cresendo").add(m_chooser);
   }
 
   @Override

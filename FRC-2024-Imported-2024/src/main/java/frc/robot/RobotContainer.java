@@ -174,18 +174,18 @@ public class RobotContainer {
   public Command getAutonomousCommand(String selectedAuto) {
 
     System.out.println(String.format("Getting autonomous program for selected, %s", selectedAuto));
+    // return m_progOneAuto;
+
+    switch(selectedAuto)
+    {
+    case "Program One":
+    return m_progOneAuto;
+    case "Program Two":
+    return m_progTwoAuto;
+    default:
     return m_progOneAuto;
 
-    // switch(selectedAuto)
-    // {
-    // case "Program One":
-    // return m_progOneAuto;
-    // case "Program Two":
-    // return m_progTwoAuto;
-    // default:
-    // return m_progOneAuto;
-
-    // }
+    }
 
   }
 

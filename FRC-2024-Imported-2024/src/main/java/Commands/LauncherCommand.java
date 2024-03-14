@@ -80,7 +80,7 @@ public class LauncherCommand extends Command {
                 }
 
             } else {
-                m_LauncherSubsystem.LiftLauncher(0.00);
+                m_LauncherSubsystem.LiftLauncher(-0.08);
             }
         }
     }

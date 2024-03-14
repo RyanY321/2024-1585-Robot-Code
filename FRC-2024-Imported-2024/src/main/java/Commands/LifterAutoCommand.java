@@ -27,8 +27,8 @@ public class LifterAutoCommand extends Command {
         if (m_launch = true) {
             // System.out.println("Engaging The Auto Launcher...");
             m_LauncherSubsystem.AutoLift(m_lifterSpeed);
-            var wait = new WaitCommand(3);
-            wait.execute();
+            // var wait = new WaitCommand(3);
+            // wait.execute();
             m_isFinished = true;
         }
     }

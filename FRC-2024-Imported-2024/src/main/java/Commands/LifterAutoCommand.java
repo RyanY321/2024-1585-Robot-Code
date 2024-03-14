@@ -2,6 +2,7 @@ package Commands;
 
 import Subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class LifterAutoCommand extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
@@ -26,6 +27,8 @@ public class LifterAutoCommand extends Command {
         if (m_launch = true) {
             // System.out.println("Engaging The Auto Launcher...");
             m_LauncherSubsystem.AutoLift(m_lifterSpeed);
+            var wait = new WaitCommand(3);
+            wait.execute();
             m_isFinished = true;
         }
     }

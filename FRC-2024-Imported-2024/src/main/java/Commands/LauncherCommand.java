@@ -68,7 +68,9 @@ public class LauncherCommand extends Command {
                 if(stopLifter0)
                 {
                     // call function to Lower the launcher
-                    m_LauncherSubsystem.LiftLauncher(-0.30);
+                   // m_LauncherSubsystem.LiftLauncher(-0.30);
+                    var cmd = new LifterAutoCommand(m_LauncherSubsystem, -.3);
+                    cmd.execute();
                 }
             }
 
@@ -77,6 +79,7 @@ public class LauncherCommand extends Command {
                 if(stopLifter1)
                 {
                     m_LauncherSubsystem.LiftLauncher(0.30);
+                
                 }
 
             } else {

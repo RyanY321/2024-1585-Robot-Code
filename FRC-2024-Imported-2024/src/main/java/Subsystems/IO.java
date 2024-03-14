@@ -14,8 +14,8 @@ public class IO extends SubsystemBase {
   private final int LiftLauncherButton = 3; // Xbox Controller X
   private final int LowerLauncherButton = 2; // Xbox Controller B
 
-  private CommandJoystick m_joystickController = new CommandJoystick(0);
-  private CommandXboxController m_controller = new CommandXboxController(1);
+  public CommandJoystick m_joystickController = new CommandJoystick(0);
+  public CommandXboxController m_controller = new CommandXboxController(1);
 
   public IO() {
 

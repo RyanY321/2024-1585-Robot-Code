@@ -4,6 +4,7 @@ import Subsystems.Launcher;
 import Subsystems.IO;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class LauncherCommand extends Command {
@@ -15,6 +16,7 @@ public class LauncherCommand extends Command {
     private Boolean stopLifter0;
     private Boolean stopLifter1;
 
+    private SequentialCommandGroup m_lifterCommands = new SequentialCommandGroup();
     private boolean isFinished = false;
 
     // Controlller Buttons
@@ -28,12 +30,22 @@ public class LauncherCommand extends Command {
         m_LauncherSubsystem = launcherSubsystem;
         m_controller = controller;
 
+        m_lifterCommands.addCommands(
+            new LifterAutoCommand(launcherSubsystem, .30),
+            new WaitCommand(3),
+            new LifterAutoCommand(launcherSubsystem, -.08)
+        );
+
         addRequirements(launcherSubsystem);
         addRequirements(controller);
     }
 
     public void initialize() {
         System.out.println("Launcher Command initialized...");
+        
+        m_controller.m_controller.b().onTrue(m_lifterCommands);
+
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -65,13 +77,13 @@ public class LauncherCommand extends Command {
 
         if (!m_LauncherSubsystem.m_lifterStopped) {
             if (m_controller.GetButtonB()) {
-                if(stopLifter0)
-                {
-                    // call function to Lower the launcher
-                   // m_LauncherSubsystem.LiftLauncher(-0.30);
-                    var cmd = new LifterAutoCommand(m_LauncherSubsystem, -.3);
-                    cmd.execute();
-                }
+                // if(stopLifter0)
+                // {
+                //     // call function to Lower the launcher
+                //     m_LauncherSubsystem.LiftLauncher(-0.30);
+                //     //var cmd = new LifterAutoCommand(m_LauncherSubsystem, -.3);
+                //     //cmd.execute();
+                // }
             }
 
             else if (m_controller.GetButtonX()) {

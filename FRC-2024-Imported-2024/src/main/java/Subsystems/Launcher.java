@@ -23,7 +23,7 @@ public class Launcher extends SubsystemBase {
     public boolean m_lifterStopped = false;
 
     public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int LiftMotorChannelCAN, int FeederMotorChannelCAN) {
-        // PWM SPARK MAX
+        // PWM TALON SR
         m_frontMotor = new Talon(FrontLaunchMotorChannelPWM);
         m_backMotor = new Talon(BackLaunchMotorChannelPWM);
 

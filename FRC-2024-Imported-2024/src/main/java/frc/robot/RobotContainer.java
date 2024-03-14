@@ -134,6 +134,12 @@ public class RobotContainer {
       new WaitCommand(3.0),
       new DriveAutoCommand(m_driveController, 0.00, 0.00)
     );
+
+    m_progTwoAuto.addCommands(
+      new DriveAutoCommand(m_driveController, -0.50, -0.50),
+      new WaitCommand(2.5),
+      new DriveAutoCommand(m_driveController, 0.00, 0.00)
+    );
   }
 
   // Configures all button mapping bindings for Xbox Controller

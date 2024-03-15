@@ -47,6 +47,8 @@ public class RobotContainer {
   private double frontLaunchMotorAutoSpeed = 0.10;
   private double backLaunchMotorAutoSpeed = 0.10;
 
+  private double autoLiftSpeed = -.34;
+
   // -------Simulator Variables -----///
   private AnalogGyro gyro;
   private AnalogGyro gyro2;
@@ -138,7 +140,7 @@ public class RobotContainer {
     );
 
     m_progTwoAuto.addCommands(
-      new LifterAutoCommand(m_launcher, -0.30),
+      new LifterAutoCommand(m_launcher, autoLiftSpeed),
       new WaitCommand(1.2),
       new LifterAutoCommand(m_launcher, -0.08),
       new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),
@@ -154,7 +156,7 @@ public class RobotContainer {
       new DriveAutoCommand(m_driveController, 0.00, 0.00)
     );
     m_progThreeAuto.addCommands(
-      new LifterAutoCommand(m_launcher, -0.30),
+      new LifterAutoCommand(m_launcher, autoLiftSpeed),
       new WaitCommand(1.2),
       new LifterAutoCommand(m_launcher, -0.08),
       new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),

@@ -31,10 +31,9 @@ public class LauncherCommand extends Command {
         m_controller = controller;
 
         m_lifterCommands.addCommands(
-            new LifterAutoCommand(launcherSubsystem, .30),
-            new WaitCommand(3),
-            new LifterAutoCommand(launcherSubsystem, -.08)
-        );
+                new LifterAutoCommand(launcherSubsystem, -.30),
+                new WaitCommand(1.2),
+                new LifterAutoCommand(launcherSubsystem, -.08));
 
         addRequirements(launcherSubsystem);
         addRequirements(controller);
@@ -42,10 +41,10 @@ public class LauncherCommand extends Command {
 
     public void initialize() {
         System.out.println("Launcher Command initialized...");
-        
-        m_controller.m_controller.b().onTrue(m_lifterCommands);
 
-
+        // m_controller.m_controller.x().onTrue(m_lifterCommands);
+        // m_controller.m_controller.b().onTrue(m_LauncherSubsystem.LiftLauncherCommand(.08));
+        // m_controller.m_controller.b().onFalse(m_LauncherSubsystem.LiftLauncherCommand(-.08));
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -77,21 +76,24 @@ public class LauncherCommand extends Command {
 
         if (!m_LauncherSubsystem.m_lifterStopped) {
             if (m_controller.GetButtonB()) {
-                // if(stopLifter0)
-                // {
-                //     // call function to Lower the launcher
-                //     m_LauncherSubsystem.LiftLauncher(-0.30);
-                //     //var cmd = new LifterAutoCommand(m_LauncherSubsystem, -.3);
-                //     //cmd.execute();
-                // }
+                // System.out.println("B button pushed");
+                // System.out.println(stopLifter1);
+                if (stopLifter1) {
+                    // call function to Lower the launcher
+                    m_LauncherSubsystem.LiftLauncher(0.3);
+                    // var cmd = new LifterAutoCommand(m_LauncherSubsystem, -.3);
+                    // cmd.execute();
+                }
             }
 
             else if (m_controller.GetButtonX()) {
                 // Call function to raise the launcher
-                if(stopLifter1)
-                {
-                    m_LauncherSubsystem.LiftLauncher(0.30);
-                
+                // System.out.println("X button pushed");
+                // System.out.println(stopLifter0);
+
+                if (stopLifter0) {
+                    m_LauncherSubsystem.LiftLauncher(-0.4);
+
                 }
 
             } else {

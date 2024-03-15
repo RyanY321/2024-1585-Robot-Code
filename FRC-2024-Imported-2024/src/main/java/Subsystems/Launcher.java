@@ -88,8 +88,8 @@ public class Launcher extends SubsystemBase {
     }
 
     public void LiftLauncher(double liftMotorSpeed) {
-                
-        // System.out.println(m_lifterStopped);
+
+        //System.out.println(m_lifterStopped);
         if (!m_lifterStopped) {
             // System.out.println("Engaging The Lift Motor At % Speed");
             m_liftMotor.set(liftMotorSpeed);

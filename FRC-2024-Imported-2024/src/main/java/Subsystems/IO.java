@@ -11,8 +11,8 @@ public class IO extends SubsystemBase {
   private final int FeederButton = 1; // xbox controller A
   private final int HighLaunchButton = 4; // Xbox Controller Y
   private final int ReverseLauncherButton = 5; // Xbox Controller Left Bumper
-  private final int LiftLauncherButton = 3; // Xbox Controller X
-  private final int LowerLauncherButton = 2; // Xbox Controller B
+  private final int LiftLauncherButton = 2; // Xbox Controller X
+  private final int LowerLauncherButton = 3; // Xbox Controller B
 
   public CommandJoystick m_joystickController = new CommandJoystick(0);
   public CommandXboxController m_controller = new CommandXboxController(1);
@@ -42,12 +42,14 @@ public class IO extends SubsystemBase {
 
   public boolean GetButtonB()
   {
-    return m_controller.button(LiftLauncherButton).getAsBoolean();
+    return m_controller.b().getAsBoolean();
+    //return m_controller.button(LiftLauncherButton).getAsBoolean();
   }
 
   public boolean GetButtonX()
   {
-        return m_controller.button(LowerLauncherButton).getAsBoolean();
+    return m_controller.x().getAsBoolean();
+        //return m_controller.button(LowerLauncherButton).getAsBoolean();
   }
 
   public boolean GetButtonA()

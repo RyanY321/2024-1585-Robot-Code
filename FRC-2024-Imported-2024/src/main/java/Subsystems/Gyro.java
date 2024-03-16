@@ -35,6 +35,11 @@ public class Gyro extends SubsystemBase {
         return m_launcherAngleGyro;
     }
 
+    public void ZeroLauncherGyro()
+    {
+        m_launcherAngleGyro.reset();
+    }
+
     @Override
 
     public void periodic() {

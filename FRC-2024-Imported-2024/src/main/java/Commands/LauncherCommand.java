@@ -17,6 +17,8 @@ public class LauncherCommand extends Command {
     private Boolean stopLifter1;
 
     private SequentialCommandGroup m_lifterCommands = new SequentialCommandGroup();
+    private SequentialCommandGroup m_launchCommands = new SequentialCommandGroup();
+
     private boolean isFinished = false;
 
     // Controlller Buttons
@@ -35,13 +37,25 @@ public class LauncherCommand extends Command {
                 new WaitCommand(1.2),
                 new LifterAutoCommand(launcherSubsystem, -.08));
 
+        m_launchCommands.addCommands(
+            new LauncherAutoCommand(launcherSubsystem, 100,
+             100,
+              0),
+            new WaitCommand(1.5),
+            new LauncherAutoCommand(launcherSubsystem, 100, 
+            100, 
+            100),
+            new WaitCommand(2),
+            new LauncherAutoCommand(launcherSubsystem, 0, 0, 0)
+        );
+
         addRequirements(launcherSubsystem);
         addRequirements(controller);
     }
 
     public void initialize() {
         System.out.println("Launcher Command initialized...");
-
+        m_controller.m_controller.y().onTrue(m_launchCommands);
         // m_controller.m_controller.x().onTrue(m_lifterCommands);
         // m_controller.m_controller.b().onTrue(m_LauncherSubsystem.LiftLauncherCommand(.08));
         // m_controller.m_controller.b().onFalse(m_LauncherSubsystem.LiftLauncherCommand(-.08));
@@ -58,21 +72,21 @@ public class LauncherCommand extends Command {
     }
 
     private void CheckButtons() {
-        if (m_controller.GetButtonY()) {
-            m_LauncherSubsystem.Launch(1.00, 1.00);
-        }
+        // if (m_controller.GetButtonY()) {
+        //     m_LauncherSubsystem.Launch(1.00, 1.00);
+        // }
 
-        else if (m_controller.GetLeftBumper()) {
+        if (m_controller.GetLeftBumper()) {
             m_LauncherSubsystem.Reverse();
         } else {
             m_LauncherSubsystem.Launch(0.00, 0.00);
         }
 
-        if (m_controller.GetButtonA()) {
-            m_LauncherSubsystem.Feeder(1.00);
-        } else {
-            m_LauncherSubsystem.Feeder(0.00);
-        }
+        // if (m_controller.GetButtonA()) {
+        //    // m_LauncherSubsystem.Feeder(1.00);
+        // } else {
+        //     m_LauncherSubsystem.Feeder(0.00);
+        // }
 
         if (!m_LauncherSubsystem.m_lifterStopped) {
             if (m_controller.GetButtonB()) {

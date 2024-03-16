@@ -83,8 +83,8 @@ public class Launcher extends SubsystemBase {
     }
 
     public void Reverse() {
-        m_frontMotor.set(-0.30);
-        m_backMotor.set(-0.30);
+        m_frontMotor.set(-0.40);
+        m_backMotor.set(-0.40);
     }
 
     public void LiftLauncher(double liftMotorSpeed) {

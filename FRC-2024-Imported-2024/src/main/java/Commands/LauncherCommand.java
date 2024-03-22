@@ -32,11 +32,13 @@ public class LauncherCommand extends Command {
         m_LauncherSubsystem = launcherSubsystem;
         m_controller = controller;
 
+        // Not Currently In Use
         m_lifterCommands.addCommands(
                 new LifterAutoCommand(launcherSubsystem, -.30),
                 new WaitCommand(1.2),
                 new LifterAutoCommand(launcherSubsystem, -.08));
 
+        // Sequential Commands For The Speaker Launching
         m_launchCommands.addCommands(
             new LauncherAutoCommand(launcherSubsystem, 100,
              100,
@@ -55,6 +57,7 @@ public class LauncherCommand extends Command {
 
     public void initialize() {
         System.out.println("Launcher Command initialized...");
+        //When Y Button Is Pressed Call launchCommands In Scheduler
         m_controller.m_controller.y().onTrue(m_launchCommands);
         // m_controller.m_controller.x().onTrue(m_lifterCommands);
         // m_controller.m_controller.b().onTrue(m_LauncherSubsystem.LiftLauncherCommand(.08));
@@ -88,6 +91,7 @@ public class LauncherCommand extends Command {
         //     m_LauncherSubsystem.Feeder(0.00);
         // }
 
+        //If The B Button Is Pressed Then Lower The Launcher
         if (!m_LauncherSubsystem.m_lifterStopped) {
             if (m_controller.GetButtonB()) {
                 // System.out.println("B button pushed");
@@ -100,6 +104,7 @@ public class LauncherCommand extends Command {
                 }
             }
 
+            //If The X Button Is Pressed Then Lift The Launcher
             else if (m_controller.GetButtonX()) {
                 // Call function to raise the launcher
                 // System.out.println("X button pushed");
@@ -111,7 +116,7 @@ public class LauncherCommand extends Command {
                 }
 
             } else {
-                m_LauncherSubsystem.LiftLauncher(-0.08);
+                m_LauncherSubsystem.LiftLauncher(-0.10);
             }
         }
     }

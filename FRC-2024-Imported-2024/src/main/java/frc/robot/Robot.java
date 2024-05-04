@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   public boolean isAuto = false;
 
   /**
-   * @implNote Robot Constructor 
+   * @implNote Robot Constructor
    */
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -54,6 +54,11 @@ public class Robot extends TimedRobot {
     // Shuffleboard.getTab("Cresendo").add(m_chooser);
     SmartDashboard.putData("Auto Selector", m_chooser);
 
+    // New Code For Pi Camera
+    // Replace GripStream With LocalHost Pi Video Stream
+    // UsbCamera c = CameraServer.startAutomaticCapture();
+    // MjpegServer s = CameraServer.addServer("gripStream");
+    // s.setSource(c);
   }
 
   @Override

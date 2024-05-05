@@ -31,9 +31,12 @@ public class Launcher extends SubsystemBase {
         m_liftMotor = new CANSparkMax(LiftMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
         m_feederMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
 
+        // Set Inversions
         m_frontMotor.setInverted(true);
         m_backMotor.setInverted(true);
         m_liftMotor.setInverted(true);
+
+        // Construct DIO
         m_lifterStop0 = new DigitalInput(0);
         m_lifterStop1 = new DigitalInput(1);
     }

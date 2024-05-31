@@ -21,9 +21,9 @@ public class LauncherCommand extends Command {
 
     private boolean isFinished = false;
 
-    // Controlller Buttons
-    // Y = high speed
-    // A = Low speed
+    // Controller Buttons
+    // Y = Launch The Note
+    // A = Feed In the Note
     // X = Raise Launcher
     // Y = Lower Launcher
     // LeftBumper = reverse

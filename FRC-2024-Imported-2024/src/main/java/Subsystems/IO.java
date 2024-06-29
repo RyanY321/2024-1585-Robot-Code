@@ -9,7 +9,7 @@ public class IO extends SubsystemBase {
 
   // modify to correct button mapping
   private final int FeederButton = 1; // xbox controller A
-  private final int HighLaunchButton = 4; // Xbox Controller Y
+  private final int LaunchButton = 4; // Xbox Controller Y
   private final int ReverseLauncherButton = 5; // Xbox Controller Left Bumper
   private final int LiftLauncherButton = 2; // Xbox Controller X
   private final int LowerLauncherButton = 3; // Xbox Controller B
@@ -40,40 +40,33 @@ public class IO extends SubsystemBase {
     return m_joystickController.getY();
   }
 
-  public boolean GetButtonB()
-  {
+  public boolean GetButtonB() {
     return m_controller.b().getAsBoolean();
-    //return m_controller.button(LiftLauncherButton).getAsBoolean();
+    // return m_controller.button(LiftLauncherButton).getAsBoolean();
   }
 
-  public boolean GetButtonX()
-  {
+  public boolean GetButtonX() {
     return m_controller.x().getAsBoolean();
-        //return m_controller.button(LowerLauncherButton).getAsBoolean();
+    // return m_controller.button(LowerLauncherButton).getAsBoolean();
   }
 
-  public boolean GetButtonA()
-  {
+  public boolean GetButtonA() {
     return m_controller.button(FeederButton).getAsBoolean();
   }
 
-  public boolean GetButtonY()
-  {
-    return m_controller.button(HighLaunchButton).getAsBoolean();
+  public boolean GetButtonY() {
+    return m_controller.button(LaunchButton).getAsBoolean();
   }
 
-  public boolean GetLeftBumper()
-  {
+  public boolean GetLeftBumper() {
     return m_controller.button(ReverseLauncherButton).getAsBoolean();
   }
 
-  public double GetFeederReverseValue()
-  {
+  public double GetFeederReverseValue() {
     return m_controller.getLeftTriggerAxis();
   }
 
-  public double GetFeederForwardValue()
-  {
+  public double GetFeederForwardValue() {
     return m_controller.getRightTriggerAxis();
   }
 
@@ -86,7 +79,7 @@ public class IO extends SubsystemBase {
   }
 
   public Trigger GetHighLaunchBtn() {
-    return m_controller.button(HighLaunchButton);
+    return m_controller.button(LaunchButton);
   }
 
   public Trigger GetLiftLauncherBtn() {
@@ -96,7 +89,6 @@ public class IO extends SubsystemBase {
   public Trigger GetLowerLauncherBtn() {
     return m_controller.button(LowerLauncherButton);
   }
-
 
   @Override
 

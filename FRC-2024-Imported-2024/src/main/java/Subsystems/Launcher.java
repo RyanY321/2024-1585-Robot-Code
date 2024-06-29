@@ -10,55 +10,52 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Launcher extends SubsystemBase {
     // PWM SPARK MAX
-    private final Talon m_frontMotor;
-    private final Talon m_backMotor;
+    private final Talon m_launchMotorA;
+    private final Talon m_launchMotorB;
 
     // CAN SPARK MAX
-    private final CANSparkMax m_feederMotor;
-    public final CANSparkMax m_liftMotor;
+    private final CANSparkMax m_guidingMotor;
+    private final CANSparkMax m_feedingMotor;
 
     private Launcher m_controller;
-    public DigitalInput m_lifterStop0;
-    public DigitalInput m_lifterStop1;
-    public boolean m_lifterStopped = false;
 
-    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int LiftMotorChannelCAN, int FeederMotorChannelCAN) {
+    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int LiftMotorChannelCAN,
+            int FeederMotorChannelCAN) {
         // PWM TALON SR
-        m_frontMotor = new Talon(FrontLaunchMotorChannelPWM);
-        m_backMotor = new Talon(BackLaunchMotorChannelPWM);
+        m_launchMotorA = new Talon(FrontLaunchMotorChannelPWM);
+        m_launchMotorB = new Talon(BackLaunchMotorChannelPWM);
 
         // CAN SPARK MAX
-        m_liftMotor = new CANSparkMax(LiftMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
-        m_feederMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
+        m_feedingMotor = new CANSparkMax(LiftMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
+        m_guidingMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
 
         // Set Inversions
-        m_frontMotor.setInverted(true);
-        m_backMotor.setInverted(true);
-        m_liftMotor.setInverted(true);
+        m_launchMotorA.setInverted(true);
+        m_launchMotorB.setInverted(true);
+        m_feedingMotor.setInverted(true);
 
-        // Construct DIO
-        m_lifterStop0 = new DigitalInput(0);
-        m_lifterStop1 = new DigitalInput(1);
+        // Set Logic
+        m_launchMotorB.addFollower(m_launchMotorA);
     }
 
-    public Command AutoLaunchCommand(double frontLaunchMotorAutoSpeed, double backLaunchMotorAutoSpeed, double feederMotorAutoSpeed) {
+    public Command AutoLaunchCommand(double launchMotorAutoSpeed, double feederMotorAutoSpeed) {
         return run(
                 () -> {
-                    this.AutoLaunch(frontLaunchMotorAutoSpeed, backLaunchMotorAutoSpeed, feederMotorAutoSpeed);
+                    this.AutoLaunch(launchMotorAutoSpeed, feederMotorAutoSpeed);
                 });
     }
 
-    public Command AutoLiftCommand(double liftMotorAutoSpeed) {
+    public Command AutoFeedCommand(double feedMotorAutoSpeed) {
         return run(
                 () -> {
-                    this.AutoLift(liftMotorAutoSpeed);
+                    this.AutoFeed(feedMotorAutoSpeed);
                 });
     }
 
-    public Command LaunchCommand(double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
+    public Command LaunchCommand(double launchMotorSpeed) {
         return run(
                 () -> {
-                    this.Launch(frontLaunchMotorSpeed, backLaunchMotorSpeed);
+                    this.Launch(launchMotorSpeed);
                 });
     }
 
@@ -70,53 +67,46 @@ public class Launcher extends SubsystemBase {
 
     }
 
-    public Command LaunchCommand(double feederMotorSpeed) {
+    public Command GuidingCommand(double guidingMotorSpeed) {
         return run(
                 () -> {
-                    this.Feeder(feederMotorSpeed);
+                    this.Guiding(guidingMotorSpeed);
                 });
     }
 
-    public Command LiftLauncherCommand(double liftMotorSpeed) {
+    public Command FeedLauncherCommand(double feedMotorSpeed) {
         return run(
                 () -> {
-                    this.LiftLauncher(liftMotorSpeed);
+                    this.FeedLauncher(feedMotorSpeed);
                 });
 
     }
 
     public void Reverse() {
-        m_frontMotor.set(-0.40);
-        m_backMotor.set(-0.40);
+        m_launchMotorA.set(-0.40);
+        m_guidingMotor.set(-0.40);
     }
 
-    public void LiftLauncher(double liftMotorSpeed) {
-
-        //System.out.println(m_lifterStopped);
-        if (!m_lifterStopped) {
-            // System.out.println("Engaging The Lift Motor At % Speed");
-            m_liftMotor.set(liftMotorSpeed);
-        }
+    public void FeedLauncher(double liftMotorSpeed) {
+            m_feedingMotor.set(liftMotorSpeed);
     }
 
-    public void Launch(double frontLaunchMotorSpeed, double backLaunchMotorSpeed) {
-        m_frontMotor.set(frontLaunchMotorSpeed);
-        m_backMotor.set(backLaunchMotorSpeed);
+    public void Launch(double launchMotorSpeed) {
+        m_launchMotorA.set(launchMotorSpeed);
     }
 
-    public void Feeder(double feederMotorSpeed) {
-        m_feederMotor.set(feederMotorSpeed);
+    public void Guiding(double guidingMotorSpeed) {
+        m_guidingMotor.set(guidingMotorSpeed);
     }
 
-    public void AutoLaunch(double FrontMotorAutoSpeed, double BackMotorAutoSpeed, double FeederMotorAutoSpeed) {
-        m_frontMotor.set(FrontMotorAutoSpeed);
-        m_backMotor.set(BackMotorAutoSpeed);
-        m_feederMotor.set(FeederMotorAutoSpeed);
+    public void AutoLaunch(double launchMotorSpeed, double FeederMotorAutoSpeed) {
+        m_launchMotorA.set(launchMotorSpeed);
+        m_guidingMotor.set(FeederMotorAutoSpeed);
 
     }
 
-    public void AutoLift(double liftMotorAutoSpeed) {
-        LiftLauncher(liftMotorAutoSpeed);
+    public void AutoFeed(double feedMotorAutoSpeed) {
+        FeedLauncher(feedMotorAutoSpeed);
     }
 
     public void periodic() {

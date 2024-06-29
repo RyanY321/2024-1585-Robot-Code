@@ -77,7 +77,7 @@ public class RobotContainer {
 
     if (!Robot.isSimulation()) {
       m_gyro = new Gyro();
-      // Located in Subsystems.Drive.Java 
+      // Located in Subsystems.Drive.Java
       // CAN ID 1 = Left Motor A
       // CAN ID 2 = Left Motor B
       // CAN ID 3 = Right Motor A
@@ -134,67 +134,45 @@ public class RobotContainer {
 
     // ------------Setup autonomous commands -----------------
     m_progOneAuto.addCommands(
-      new DriveAutoCommand(m_driveController, -0.50, -0.50),
-      new WaitCommand(2.0),
-      new DriveAutoCommand(m_driveController, 0.00, 0.00)
-    );
+        new DriveAutoCommand(m_driveController, -0.50, -0.50),
+        new WaitCommand(2.0),
+        new DriveAutoCommand(m_driveController, 0.00, 0.00));
 
     m_progTwoAuto.addCommands(
-      new LifterAutoCommand(m_launcher, autoLiftSpeed),
-      new WaitCommand(1.2),
-      new LifterAutoCommand(m_launcher, -0.08),
-      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),
-      new WaitCommand(1.2),
-      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 1.00),
-      new WaitCommand(1.5),
-      new LauncherAutoCommand(m_launcher, 0.00, 0.00, 0.00),
-      new WaitCommand(1.0),
-      new LifterAutoCommand(m_launcher, 0.08),
-      new LifterAutoCommand(m_launcher, 0.00),
-      new DriveAutoCommand(m_driveController, -0.50, -0.50),
-      new WaitCommand(2.0),
-      new DriveAutoCommand(m_driveController, 0.00, 0.00)
-    );
+        new LifterAutoCommand(m_launcher, autoLiftSpeed),
+        new WaitCommand(1.2),
+        new LifterAutoCommand(m_launcher, -0.08),
+        new LauncherAutoCommand(m_launcher, 1.00, 0.00),
+        new WaitCommand(1.2),
+        new LauncherAutoCommand(m_launcher, 1.00, 1.00),
+        new WaitCommand(1.5),
+        new LauncherAutoCommand(m_launcher, 0.00, 0.00),
+        new WaitCommand(1.0),
+        new LifterAutoCommand(m_launcher, 0.08),
+        new LifterAutoCommand(m_launcher, 0.00),
+        new DriveAutoCommand(m_driveController, -0.50, -0.50),
+        new WaitCommand(2.0),
+        new DriveAutoCommand(m_driveController, 0.00, 0.00));
     m_progThreeAuto.addCommands(
-      new LifterAutoCommand(m_launcher, autoLiftSpeed),
-      new WaitCommand(1.2),
-      new LifterAutoCommand(m_launcher, -0.08),
-      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 0.00),
-      new WaitCommand(1.2),
-      new LauncherAutoCommand(m_launcher, 1.00, 1.00, 1.00),
-      new WaitCommand(1.5),
-      new LauncherAutoCommand(m_launcher, 0.00, 0.00, 0.00),
-      new WaitCommand(1.0),
-      new LifterAutoCommand(m_launcher, 0.08),
-      new LifterAutoCommand(m_launcher, 0.00),
-      new DriveAutoCommand(m_driveController, -0.40, -0.60),
-      new WaitCommand(4.0),
-      new DriveAutoCommand(m_driveController, 0.00, 0.00)
-    );
+        new LifterAutoCommand(m_launcher, autoLiftSpeed),
+        new WaitCommand(1.2),
+        new LifterAutoCommand(m_launcher, -0.08),
+        new LauncherAutoCommand(m_launcher, 1.00, 0.00),
+        new WaitCommand(1.2),
+        new LauncherAutoCommand(m_launcher, 1.00, 1.00),
+        new WaitCommand(1.5),
+        new LauncherAutoCommand(m_launcher, 0.00, 0.00),
+        new WaitCommand(1.0),
+        new LifterAutoCommand(m_launcher, 0.08),
+        new LifterAutoCommand(m_launcher, 0.00),
+        new DriveAutoCommand(m_driveController, -0.40, -0.60),
+        new WaitCommand(4.0),
+        new DriveAutoCommand(m_driveController, 0.00, 0.00));
   }
 
   // Configures all button mapping bindings for Xbox Controller
   private void configureBindings() {
-
-    // High Launcher Power Button
-    // m_controller.GetHighLaunchBtn().whileTrue(m_launcher.LaunchCommand(1.00));
-    // m_controller.GetHighLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
-    // // Low Launcher Power Button
-    // m_controller.GetLowLaunchBtn().whileTrue(m_launcher.LaunchCommand(0.50));
-    // m_controller.GetLowLaunchBtn().onFalse(m_launcher.LaunchCommand(0.00));
-
-    // // Reverse The Launcher Button
-    // m_controller.GetReverseLauncherBtn().whileTrue(m_launcher.LaunchCommand(-0.30));
-    // m_controller.GetReverseLauncherBtn().whileFalse(m_launcher.LaunchCommand(0.00));
-
-    // Lift The Launcher Button
-    // m_controller.GetLiftLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(0.40));
-    // m_controller.GetLiftLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
-
-    // Lower The Launcher Button
-    // m_controller.GetLowerLauncherBtn().whileTrue(m_launcher.LiftLauncherCommand(-0.40));
-    // m_controller.GetLowerLauncherBtn().whileFalse(m_launcher.LiftLauncherCommand(0.00));
-  }
+}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -206,16 +184,15 @@ public class RobotContainer {
     System.out.println(String.format("Getting autonomous program for selected, %s", selectedAuto));
     // return m_progOneAuto;
 
-    switch(selectedAuto)
-    {
-    case Robot.programOneAuto:
-    return m_progOneAuto;
-    case Robot.programTwoAuto:
-    return m_progTwoAuto;
-    case  Robot.programThreeAuto:
-    return m_progThreeAuto;
-    default:
-    return m_progOneAuto;
+    switch (selectedAuto) {
+      case Robot.programOneAuto:
+        return m_progOneAuto;
+      case Robot.programTwoAuto:
+        return m_progTwoAuto;
+      case Robot.programThreeAuto:
+        return m_progThreeAuto;
+      default:
+        return m_progOneAuto;
 
     }
 

@@ -22,7 +22,7 @@ public class Drive extends SubsystemBase {
 
     public Drive(Gyro gyro) {
         m_gyro = gyro;
-        //m_leftMotor = new PWMSparkMax(leftMotorChannel);
+        // m_leftMotor = new PWMSparkMax(leftMotorChannel);
         m_leftMotorA = new CANSparkMax(1, CANSparkLowLevel.MotorType.kBrushed);
         m_leftMotorB = new CANSparkMax(2, CANSparkLowLevel.MotorType.kBrushed);
         m_rightMotorA = new CANSparkMax(3, CANSparkLowLevel.MotorType.kBrushed);
@@ -34,7 +34,7 @@ public class Drive extends SubsystemBase {
         m_leftMotorB.follow(m_leftMotorA);
         m_rightMotorB.follow(m_rightMotorA);
 
-        //m_rightMotor = new PWMSparkMax(rightMotorChannel);
+        // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);
         m_driveController.setSafetyEnabled(false);
         m_driveController.setExpiration(0.1);
@@ -66,12 +66,12 @@ public class Drive extends SubsystemBase {
 
         double error = m_gyro.GetStartHeading() - m_gyro.GetGyro().getAngle();
         // m_driveController.tankDrive(leftSpeed, rightSpeed);
-        // On the base the left and right sides are inverted, LeftSpeed means RightSpeed, RightSpeed means LeftSpeed
+        // On the base the left and right sides are inverted, LeftSpeed means
+        // RightSpeed, RightSpeed means LeftSpeed
         m_driveController.tankDrive(leftSpeed + kP * error, rightSpeed - kP * error);
     }
 
-    public void MoveTankAuto(double leftSpeed, double rightSpeed)
-    {
+    public void MoveTankAuto(double leftSpeed, double rightSpeed) {
         m_driveController.tankDrive(leftSpeed, rightSpeed);
     }
 

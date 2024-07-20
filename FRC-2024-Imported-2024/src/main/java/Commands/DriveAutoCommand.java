@@ -10,7 +10,7 @@ public class DriveAutoCommand extends Command {
   private double m_leftSpeed;
   private double m_rightSpeed;
   private boolean m_isFinished = false;
-
+  
   /**
    * Creates a new Drive auto command.
    *

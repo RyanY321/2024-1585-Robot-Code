@@ -15,8 +15,7 @@ public class Gyro extends SubsystemBase {
         return m_heading;
     }
 
-    public Gyro() 
-    {
+    public Gyro() {
 
         m_gyro = new ADXRS450_Gyro();
 
@@ -35,9 +34,8 @@ public class Gyro extends SubsystemBase {
         return m_launcherAngleGyro;
     }
 
-    //Add Reset Function To The Gyro
-    public void ZeroLauncherGyro()
-    {
+    // Add Reset Function To The Gyro
+    public void ZeroLauncherGyro() {
         m_launcherAngleGyro.reset();
     }
 

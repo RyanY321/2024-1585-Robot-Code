@@ -45,7 +45,7 @@ public class LauncherCommand extends Command {
                 new WaitCommand(1.5),
                 new LauncherAutoCommand(launcherSubsystem,
                         100,
-                        100),
+                        -100),
                 new WaitCommand(2),
                 new LauncherAutoCommand(launcherSubsystem, 0, 0));
 
@@ -56,7 +56,7 @@ public class LauncherCommand extends Command {
     public void initialize() {
         System.out.println("Launcher Command initialized...");
         // When Y Button Is Pressed Call launchCommands In Scheduler
-        m_controller.m_controller.y().onTrue(m_launchCommands);
+        // m_controller.m_controller.y().onTrue(m_launchCommands);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -70,25 +70,26 @@ public class LauncherCommand extends Command {
     }
 
     private void CheckButtons() {
-        if (m_controller.GetLeftBumper()) {
-            m_LauncherSubsystem.Reverse();
-        } else {
-            m_LauncherSubsystem.Launch(0.00);
-            m_LauncherSubsystem.Guiding(0.00);
-        }
-
-        if (m_controller.GetButtonA()) {
-        m_LauncherSubsystem.Guiding(1.00);
-        } else {
-        m_LauncherSubsystem.Guiding(0.00);
-        }
-
         if (m_controller.GetButtonB()) {
             m_LauncherSubsystem.FeedLauncher(-0.3);
         } else if (m_controller.GetButtonX()) {
             m_LauncherSubsystem.FeedLauncher(0.3);
         } else {
-            m_LauncherSubsystem.FeedLauncher(-0.10);
+            m_LauncherSubsystem.FeedLauncher(0.00);
+        }
+
+        if (m_controller.GetButtonY()) {
+            m_LauncherSubsystem.Launch(1.00);
+            m_LauncherSubsystem.Guiding(0.00);
+        } else if (m_controller.GetLeftBumper()) {
+            m_LauncherSubsystem.Launch(-0.40);
+            m_LauncherSubsystem.Guiding(0.40);
+        } else if (m_controller.GetButtonA()) {
+            m_LauncherSubsystem.Launch(0.00);
+            m_LauncherSubsystem.Guiding(-1.00);
+        } else {
+            m_LauncherSubsystem.Launch(0.00);
+            m_LauncherSubsystem.Guiding(0.00);
         }
     }
 

@@ -19,23 +19,20 @@ public class Launcher extends SubsystemBase {
 
     private Launcher m_controller;
 
-    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int LiftMotorChannelCAN,
+    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int FeedingMotorChannelCAN,
             int FeederMotorChannelCAN) {
         // PWM TALON SR
         m_launchMotorA = new Talon(FrontLaunchMotorChannelPWM);
         m_launchMotorB = new Talon(BackLaunchMotorChannelPWM);
 
         // CAN SPARK MAX
-        m_feedingMotor = new CANSparkMax(LiftMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
+        m_feedingMotor = new CANSparkMax(FeedingMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
         m_guidingMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
 
         // Set Inversions
         m_launchMotorA.setInverted(true);
-        m_launchMotorB.setInverted(true);
+        m_launchMotorB.setInverted(false);
         m_feedingMotor.setInverted(true);
-
-        // Set Logic
-        m_launchMotorB.addFollower(m_launchMotorA);
     }
 
     public Command AutoLaunchCommand(double launchMotorAutoSpeed, double feederMotorAutoSpeed) {
@@ -59,14 +56,6 @@ public class Launcher extends SubsystemBase {
                 });
     }
 
-    public Command ReverseCommand() {
-        return run(
-                () -> {
-                    this.Reverse();
-                });
-
-    }
-
     public Command GuidingCommand(double guidingMotorSpeed) {
         return run(
                 () -> {
@@ -82,17 +71,13 @@ public class Launcher extends SubsystemBase {
 
     }
 
-    public void Reverse() {
-        m_launchMotorA.set(-0.40);
-        m_guidingMotor.set(-0.40);
-    }
-
-    public void FeedLauncher(double liftMotorSpeed) {
-            m_feedingMotor.set(liftMotorSpeed);
+    public void FeedLauncher(double feedMotorSpeed) {
+        m_feedingMotor.set(feedMotorSpeed);
     }
 
     public void Launch(double launchMotorSpeed) {
         m_launchMotorA.set(launchMotorSpeed);
+        m_launchMotorB.set(launchMotorSpeed);
     }
 
     public void Guiding(double guidingMotorSpeed) {
@@ -101,6 +86,7 @@ public class Launcher extends SubsystemBase {
 
     public void AutoLaunch(double launchMotorSpeed, double FeederMotorAutoSpeed) {
         m_launchMotorA.set(launchMotorSpeed);
+        m_launchMotorB.set(launchMotorSpeed);
         m_guidingMotor.set(FeederMotorAutoSpeed);
 
     }

@@ -19,6 +19,7 @@ public class LauncherCommand extends Command {
     private SequentialCommandGroup m_launchCommands = new SequentialCommandGroup();
 
     private boolean isFinished = false;
+    private boolean reversing = false;
 
     // Controller Buttons
     // Y = Launch The Note
@@ -70,6 +71,9 @@ public class LauncherCommand extends Command {
     }
 
     private void CheckButtons() {
+
+        reversing = m_controller.GetButtonY() || m_controller.GetButtonA() == true;
+
         if (m_controller.GetButtonB()) {
             m_LauncherSubsystem.FeedLauncher(-0.3);
         } else if (m_controller.GetButtonX()) {
@@ -80,15 +84,19 @@ public class LauncherCommand extends Command {
 
         if (m_controller.GetButtonY()) {
             m_LauncherSubsystem.Launch(1.00);
-            m_LauncherSubsystem.Guiding(0.00);
-        } else if (m_controller.GetLeftBumper()) {
-            m_LauncherSubsystem.Launch(-0.40);
-            m_LauncherSubsystem.Guiding(0.40);
-        } else if (m_controller.GetButtonA()) {
-            m_LauncherSubsystem.Launch(0.00);
-            m_LauncherSubsystem.Guiding(-1.00);
+        } else if (reversing == false) {
+            if (m_controller.GetLeftBumper()) {
+                m_LauncherSubsystem.Launch(-0.40);
+                m_LauncherSubsystem.Guiding(0.40);
+            }
         } else {
             m_LauncherSubsystem.Launch(0.00);
+            m_LauncherSubsystem.Launch(0.00);
+        }
+
+        if (m_controller.GetButtonA()) {
+            m_LauncherSubsystem.Guiding(-1.00);
+        } else {
             m_LauncherSubsystem.Guiding(0.00);
         }
     }

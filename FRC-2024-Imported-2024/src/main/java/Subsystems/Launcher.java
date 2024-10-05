@@ -19,20 +19,19 @@ public class Launcher extends SubsystemBase {
 
     private Launcher m_controller;
 
-    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int FeedingMotorChannelCAN,
-            int FeederMotorChannelCAN) {
+    public Launcher(int FrontLaunchMotorChannelPWM, int BackLaunchMotorChannelPWM, int FeederMotorChannelCAN,
+            int GuiderMotorChannelCAN) {
         // PWM TALON SR
         m_launchMotorA = new Talon(FrontLaunchMotorChannelPWM);
         m_launchMotorB = new Talon(BackLaunchMotorChannelPWM);
 
         // CAN SPARK MAX
-        m_feedingMotor = new CANSparkMax(FeedingMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
-        m_guidingMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
+        m_guidingMotor = new CANSparkMax(GuiderMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
+        m_feedingMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushless);
 
         // Set Inversions
         m_launchMotorA.setInverted(true);
         m_launchMotorB.setInverted(false);
-        m_feedingMotor.setInverted(true);
     }
 
     public Command AutoLaunchCommand(double launchMotorAutoSpeed, double feederMotorAutoSpeed) {

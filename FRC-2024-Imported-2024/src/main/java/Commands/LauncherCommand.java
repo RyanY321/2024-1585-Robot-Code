@@ -85,9 +85,9 @@ public class LauncherCommand extends Command {
          * to turn off.
          */
         if (m_controller.GetButtonB()) {
-            m_LauncherSubsystem.FeedLauncher(-0.3);
+            m_LauncherSubsystem.FeedLauncher(-0.1);
         } else if (m_controller.GetButtonX()) {
-            m_LauncherSubsystem.FeedLauncher(0.3);;
+            m_LauncherSubsystem.FeedLauncher(0.1);;
         } else {
             m_LauncherSubsystem.FeedLauncher(0.00);
         }

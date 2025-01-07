@@ -1,10 +1,10 @@
 package Subsystems;
 
-import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.spark.SparkLowLevel;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkMax;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,23 +13,23 @@ import frc.robot.Robot;
 public class Drive extends SubsystemBase {
 
     private DifferentialDrive m_driveController;
-    private final CANSparkMax m_leftMotorA;
-    private final CANSparkMax m_leftMotorB;
-    private final CANSparkMax m_rightMotorA;
-    private final CANSparkMax m_rightMotorB;
+    private final SparkMax m_leftMotorA;
+    private final SparkMax m_leftMotorB;
+    private final SparkMax m_rightMotorA;
+    private final SparkMax m_rightMotorB;
     private final Gyro m_gyro;
     private double kP = 1;
 
     public Drive(Gyro gyro) {
         m_gyro = gyro;
         // m_leftMotor = new PWMSparkMax(leftMotorChannel);
-        m_leftMotorA = new CANSparkMax(1, CANSparkLowLevel.MotorType.kBrushed);
-        m_leftMotorB = new CANSparkMax(2, CANSparkLowLevel.MotorType.kBrushed);
-        m_rightMotorA = new CANSparkMax(3, CANSparkLowLevel.MotorType.kBrushed);
-        m_rightMotorB = new CANSparkMax(4, CANSparkLowLevel.MotorType.kBrushed);
+        m_leftMotorA = new SparkMax(1, SparkLowLevel.MotorType.kBrushed);
+        m_leftMotorB = new SparkMax(2, SparkLowLevel.MotorType.kBrushed);
+        m_rightMotorA = new SparkMax(3, SparkLowLevel.MotorType.kBrushed);
+        m_rightMotorB = new SparkMax(4, SparkLowLevel.MotorType.kBrushed);
 
-        m_leftMotorA.setInverted(false);
-        m_rightMotorA.setInverted(true);
+        m_leftMotorA.Inverted(false);
+        m_rightMotorA.Inverted(true);
 
         m_leftMotorB.follow(m_leftMotorA);
         m_rightMotorB.follow(m_rightMotorA);

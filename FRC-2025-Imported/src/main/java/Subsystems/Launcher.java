@@ -1,9 +1,8 @@
 package Subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel;
 
-import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,8 +13,8 @@ public class Launcher extends SubsystemBase {
     private final Talon m_launchMotorB;
 
     // CAN SPARK MAX
-    private final CANSparkMax m_guidingMotor;
-    private final CANSparkMax m_feedingMotor;
+    private final SparkMax m_guidingMotor;
+    private final SparkMax m_feedingMotor;
 
     private Launcher m_controller;
 
@@ -26,8 +25,8 @@ public class Launcher extends SubsystemBase {
         m_launchMotorB = new Talon(BackLaunchMotorChannelPWM);
 
         // CAN SPARK MAX
-        m_guidingMotor = new CANSparkMax(GuiderMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushed);
-        m_feedingMotor = new CANSparkMax(FeederMotorChannelCAN, CANSparkLowLevel.MotorType.kBrushless);
+        m_guidingMotor = new SparkMax(GuiderMotorChannelCAN, SparkLowLevel.MotorType.kBrushed);
+        m_feedingMotor = new SparkMax(FeederMotorChannelCAN, SparkLowLevel.MotorType.kBrushless);
 
         // Set Inversions
         m_launchMotorA.setInverted(true);

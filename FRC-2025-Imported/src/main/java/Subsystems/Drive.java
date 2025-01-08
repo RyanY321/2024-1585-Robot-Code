@@ -1,6 +1,8 @@
 package Subsystems;
 
 import com.revrobotics.spark.SparkLowLevel;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
@@ -20,6 +22,8 @@ public class Drive extends SubsystemBase {
     private final Gyro m_gyro;
     private double kP = 1;
 
+
+    @SuppressWarnings("deprecation")
     public Drive(Gyro gyro) {
         m_gyro = gyro;
         // m_leftMotor = new PWMSparkMax(leftMotorChannel);
@@ -27,13 +31,19 @@ public class Drive extends SubsystemBase {
         m_leftMotorB = new SparkMax(2, SparkLowLevel.MotorType.kBrushed);
         m_rightMotorA = new SparkMax(3, SparkLowLevel.MotorType.kBrushed);
         m_rightMotorB = new SparkMax(4, SparkLowLevel.MotorType.kBrushed);
+        SparkMaxConfig globalConfig = new SparkMaxConfig();
+        
+        m_leftMotorA.setInverted(false);
+        m_rightMotorA.setInverted(true);
 
-        m_leftMotorA.Inverted(false);
-        m_rightMotorA.Inverted(true);
+        SparkMaxConfig m_rightMotorAConfig = new SparkMaxConfig();
+        SparkMaxConfig m_leftMotorAConfig = new SparkMaxConfig();
 
-        m_leftMotorB.follow(m_leftMotorA);
-        m_rightMotorB.follow(m_rightMotorA);
+        m_rightMotorAConfig
+            .follow(m_rightMotorB);
 
+        m_leftMotorAConfig
+            .follow(m_leftMotorB);
         // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);
         m_driveController.setSafetyEnabled(false);

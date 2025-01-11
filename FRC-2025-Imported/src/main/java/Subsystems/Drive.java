@@ -44,6 +44,7 @@ public class Drive extends SubsystemBase {
 
         m_leftMotorAConfig
             .follow(m_leftMotorB);
+
         // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);
         m_driveController.setSafetyEnabled(false);

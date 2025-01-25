@@ -33,6 +33,8 @@ public class Drive extends SubsystemBase {
         m_rightMotorB = new SparkMax(4, SparkLowLevel.MotorType.kBrushed);
         SparkMaxConfig globalConfig = new SparkMaxConfig();
         
+        // m_leftMotorA.setInverted(true);
+        // m_rightMotorA.setInverted(false);
         m_leftMotorA.setInverted(false);
         m_rightMotorA.setInverted(true);
 

@@ -38,14 +38,14 @@ public class Drive extends SubsystemBase {
         m_leftMotorA.setInverted(false);
         m_rightMotorA.setInverted(true);
 
-        SparkMaxConfig m_rightMotorAConfig = new SparkMaxConfig();
-        SparkMaxConfig m_leftMotorAConfig = new SparkMaxConfig();
+        SparkMaxConfig m_rightMotorBConfig = new SparkMaxConfig();
+        SparkMaxConfig m_leftMotorBConfig = new SparkMaxConfig();
 
-        m_rightMotorAConfig
-            .follow(m_rightMotorB);
+        m_rightMotorBConfig
+            .follow(m_rightMotorA);
 
-        m_leftMotorAConfig
-            .follow(m_leftMotorB);
+        m_leftMotorBConfig
+            .follow(m_leftMotorA);
 
         // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);

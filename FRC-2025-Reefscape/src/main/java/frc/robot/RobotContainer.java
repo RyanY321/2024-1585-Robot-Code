@@ -3,6 +3,7 @@ package frc.robot;
 import Subsystems.Drive;
 import Subsystems.IO;
 import Subsystems.Gyro;
+import Subsystems.Coral;
 
 import Commands.DriveCommand;
 import Commands.DriveAutoCommand;
@@ -28,6 +29,7 @@ public class RobotContainer {
   private IO m_controller = new IO();
   public Gyro m_gyro;
   private Drive m_driveController;
+  private Coral m_coral;
 
   private DriveCommand m_DriveCommand;
 
@@ -79,6 +81,7 @@ public class RobotContainer {
       // CAN ID 3 = Right Motor A
       // CAN ID 4 = Right Motor B
       m_driveController = new Drive(m_gyro);
+      m_coral = new Coral(5,6);
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);

@@ -20,9 +20,6 @@ public class Coral extends SubsystemBase {
         SparkMaxConfig globalConfig = new SparkMaxConfig();
         SparkMaxConfig m_beltMotorBConfig = new SparkMaxConfig();
 
-        m_beltMotorBConfig
-            .follow(m_beltMotorA);
-
         m_beltMotorA.setInverted(false);
         m_beltMotorB.setInverted(true);
     }
@@ -36,6 +33,7 @@ public class Coral extends SubsystemBase {
 
     public void GuideCoral(double CoralGuideSpeed) {
         m_beltMotorA.set(CoralGuideSpeed);
+        m_beltMotorB.set(CoralGuideSpeed);
     }
 
 

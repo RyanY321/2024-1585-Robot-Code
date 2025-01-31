@@ -1,8 +1,11 @@
 package Subsystems;
 
+import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
@@ -31,7 +34,7 @@ public class Drive extends SubsystemBase {
         m_leftMotorB = new SparkMax(2, SparkLowLevel.MotorType.kBrushed);
         m_rightMotorA = new SparkMax(3, SparkLowLevel.MotorType.kBrushed);
         m_rightMotorB = new SparkMax(4, SparkLowLevel.MotorType.kBrushed);
-        SparkMaxConfig globalConfig = new SparkMaxConfig();
+        SparkMaxConfig config = new SparkMaxConfig();
         
         // m_leftMotorA.setInverted(true);
         // m_rightMotorA.setInverted(false);
@@ -41,11 +44,17 @@ public class Drive extends SubsystemBase {
         SparkMaxConfig m_rightMotorBConfig = new SparkMaxConfig();
         SparkMaxConfig m_leftMotorBConfig = new SparkMaxConfig();
 
+        config
+            .idleMode(IdleMode.kBrake);
+
         m_rightMotorBConfig
             .follow(m_rightMotorA);
 
         m_leftMotorBConfig
             .follow(m_leftMotorA);
+
+        m_rightMotorB.configure(m_rightMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_leftMotorB.configure(m_leftMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
         // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);

@@ -4,6 +4,7 @@ import Subsystems.Drive;
 import Subsystems.IO;
 import Subsystems.Gyro;
 import Subsystems.Coral;
+import Subsystems.Elevator;
 
 import Commands.DriveCommand;
 import Commands.DriveAutoCommand;
@@ -30,6 +31,7 @@ public class RobotContainer {
   public Gyro m_gyro;
   private Drive m_driveController;
   private Coral m_coral;
+  private Elevator m_elevator;
 
   private DriveCommand m_DriveCommand;
 
@@ -82,6 +84,7 @@ public class RobotContainer {
       // CAN ID 4 = Right Motor B
       m_driveController = new Drive(m_gyro);
       m_coral = new Coral(5,6);
+      m_elevator = new Elevator(7);
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);

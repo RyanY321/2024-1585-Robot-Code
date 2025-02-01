@@ -67,6 +67,38 @@ public class IO extends SubsystemBase {
       return m_controller.button(RightBumper).getAsBoolean();
   }
 
+  public boolean DPadUp() {
+    return m_controller.povUp().getAsBoolean();
+  }
+
+  public boolean DPadUpRight() {
+    return m_controller.povUpRight().getAsBoolean();
+  }
+
+  public boolean DpadUpLeft() {
+    return m_controller.povUpLeft().getAsBoolean();
+  }
+
+  public boolean DPadDown() {
+    return m_controller.povDown().getAsBoolean();
+  }
+
+  public boolean DPadDownRight() {
+    return m_controller.povDownRight().getAsBoolean();
+  }
+
+  public boolean DPadDownLeft() {
+    return m_controller.povDownLeft().getAsBoolean();
+  }
+
+  public boolean DPadLeft() {
+    return m_controller.povLeft().getAsBoolean();
+  }
+
+  public boolean DPadRight() {
+    return m_controller.povRight().getAsBoolean();
+  }
+
   @Override
 
   public void periodic() {

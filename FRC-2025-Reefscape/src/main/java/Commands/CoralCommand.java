@@ -32,7 +32,7 @@ public class CoralCommand extends Command {
         if (m_controller.GetButtonX()) {
             m_coralSubsystem.CoralGuide(.20);
         } else {
-            if (m_controller.GetButtonY()) {
+            if (m_controller.GetButtonB()) {
                 m_coralSubsystem.CoralGuide(-.20);
             }
         }

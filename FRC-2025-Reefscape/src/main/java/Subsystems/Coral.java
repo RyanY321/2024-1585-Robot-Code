@@ -3,6 +3,9 @@ package Subsystems;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,15 +18,28 @@ public class Coral extends SubsystemBase {
     
     @SuppressWarnings("deprecation")
     public Coral(int BeltMotorAChannelCAN, int BeltMotorBChannelCAN) {
+        // Create New Spark Max Objects
         m_beltMotorA = new SparkMax(BeltMotorAChannelCAN, SparkLowLevel.MotorType.kBrushed);
         m_beltMotorB = new SparkMax(BeltMotorBChannelCAN, SparkLowLevel.MotorType.kBrushed);
-        SparkMaxConfig globalConfig = new SparkMaxConfig();
+        SparkMaxConfig config = new SparkMaxConfig();
         SparkMaxConfig m_beltMotorBConfig = new SparkMaxConfig();
 
+        // Creating The Invert Variables For Spark Max
         m_beltMotorA.setInverted(false);
-        m_beltMotorB.setInverted(true);
+        m_beltMotorB.setInverted(false);
+
+        // Setting Config Parameters
+
+        config
+            .idleMode(IdleMode.kBrake);
+
+        m_beltMotorBConfig
+            .follow(m_beltMotorA);
+
+        m_beltMotorB.configure(m_beltMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
+    //Crate A New Command
     public Command CoralGuide(double CoralGuideSpeed) {
         return run(
                 () -> {
@@ -33,7 +49,6 @@ public class Coral extends SubsystemBase {
 
     public void GuideCoral(double CoralGuideSpeed) {
         m_beltMotorA.set(CoralGuideSpeed);
-        m_beltMotorB.set(CoralGuideSpeed);
     }
 
 

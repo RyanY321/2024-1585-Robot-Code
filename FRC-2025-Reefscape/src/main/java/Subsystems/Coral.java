@@ -11,32 +11,28 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Coral extends SubsystemBase {
-    private final SparkMax m_beltMotorA;
-    private final SparkMax m_beltMotorB;
+    private final SparkMax m_beltMotor;
 
     private Coral m_controller;
     
-    @SuppressWarnings("deprecation")
-    public Coral(int BeltMotorAChannelCAN, int BeltMotorBChannelCAN) {
+    public Coral(int BeltMotorChannelCAN) {
         // Create New Spark Max Objects
-        m_beltMotorA = new SparkMax(BeltMotorAChannelCAN, SparkLowLevel.MotorType.kBrushed);
-        m_beltMotorB = new SparkMax(BeltMotorBChannelCAN, SparkLowLevel.MotorType.kBrushed);
+        m_beltMotor = new SparkMax(BeltMotorChannelCAN, SparkLowLevel.MotorType.kBrushed);
         SparkMaxConfig config = new SparkMaxConfig();
-        SparkMaxConfig m_beltMotorBConfig = new SparkMaxConfig();
+        SparkMaxConfig m_beltMotorConfig = new SparkMaxConfig();
 
         // Creating The Invert Variables For Spark Max
-        m_beltMotorA.setInverted(false);
-        m_beltMotorB.setInverted(false);
+
 
         // Setting Config Parameters
 
         config
             .idleMode(IdleMode.kBrake);
 
-        m_beltMotorBConfig
-            .follow(m_beltMotorA);
+        m_beltMotorConfig
+            .inverted(false);
 
-        m_beltMotorB.configure(m_beltMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_beltMotor.configure(m_beltMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     //Crate A New Command
@@ -48,7 +44,7 @@ public class Coral extends SubsystemBase {
     }
 
     public void GuideCoral(double CoralGuideSpeed) {
-        m_beltMotorA.set(CoralGuideSpeed);
+        m_beltMotor.set(CoralGuideSpeed);
     }
 
 

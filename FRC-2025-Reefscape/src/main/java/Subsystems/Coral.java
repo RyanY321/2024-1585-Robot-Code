@@ -48,7 +48,7 @@ public class Coral extends SubsystemBase {
     }
 
 
-    public Command AutoralGuide(double CoralGuideAutoSpeed) {
+    public Command AutoCoralGuide(double CoralGuideAutoSpeed) {
         return run(
                 () -> {
                     this.AutoGuideCoral(CoralGuideAutoSpeed);

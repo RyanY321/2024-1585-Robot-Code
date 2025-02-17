@@ -8,6 +8,7 @@ import Subsystems.Elevator;
 import Subsystems.Algae;
 
 import Commands.DriveCommand;
+import Commands.AlgaeAutoCommand;
 import Commands.DriveAutoCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -74,6 +75,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
+
+
     // Configure the controller bindings
     configureBindings();
 
@@ -88,6 +91,7 @@ public class RobotContainer {
       m_coral = new Coral(5);
       m_elevator = new Elevator(6);
       m_alage = new Algae(7);
+
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);

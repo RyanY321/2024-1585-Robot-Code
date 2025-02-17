@@ -44,6 +44,17 @@ public class Algae extends SubsystemBase{
         m_shootMotor.set(ShootSpeed);
     }
 
+    public Command AutoShoot(double ShootAutoSpeed) {
+        return run(
+                () -> {
+                    this.AutoShootAlgae(ShootAutoSpeed);
+                });
+    }
+
+    public void AutoShootAlgae(double ShootAutoSpeed) {
+        m_shootMotor.set(ShootAutoSpeed);
+    }
+
 
     public void periodic() {
         // This method will be called once per scheduler run

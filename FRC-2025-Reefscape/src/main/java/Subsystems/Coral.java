@@ -48,6 +48,17 @@ public class Coral extends SubsystemBase {
     }
 
 
+    public Command AutoralGuide(double CoralGuideAutoSpeed) {
+        return run(
+                () -> {
+                    this.AutoGuideCoral(CoralGuideAutoSpeed);
+                });
+    }
+
+    public void AutoGuideCoral(double CoralGuideAutoSpeed) {
+        m_beltMotor.set(CoralGuideAutoSpeed);
+    }
+
     public void periodic() {
         // This method will be called once per scheduler run
     }

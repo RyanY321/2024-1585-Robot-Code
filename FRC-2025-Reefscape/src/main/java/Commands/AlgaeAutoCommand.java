@@ -20,13 +20,13 @@ public class AlgaeAutoCommand extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("Coral Auto Command Has Been Initialized...");
+        System.out.println("Algae Auto Command Has Been Initialized...");
     }
 
     @Override
     public void execute() {
         if (m_algae = true) {
-            System.out.println("Engaging The Auto Coral Command...");
+            System.out.println("Engaging The Auto Algae Command...");
             m_algaeSubsystem.AutoShoot(m_shootMotorSpeed);
             m_isFinished = true;
         }

@@ -43,6 +43,17 @@ public class Elevator extends SubsystemBase {
         m_elevatorMotor.set(ElevatorSpeed);
     }
 
+    public Command AutolevatorGuide(double ElevatorAutoSpeed) {
+        return run(
+                () -> {
+                    this.AutoGuideElevator(ElevatorAutoSpeed);
+                });
+    }
+
+    public void AutoGuideElevator(double ElevatorAutoSpeed) {
+        m_elevatorMotor.set(ElevatorAutoSpeed);
+    }
+
     public void periodic() {
 
     }

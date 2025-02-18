@@ -141,9 +141,9 @@ public class RobotContainer {
 
     // ------------Setup autonomous commands -----------------
 
-    //Shoot
+    //Drive Out
     m_progOneAuto.addCommands(
-        new DriveAutoCommand(m_driveController, 0.50, 0.50),
+        new DriveAutoCommand(m_driveController, -0.50, -0.50),
         new WaitCommand(2.0),
         new DriveAutoCommand(m_driveController, 0.00, 0.00));
   }

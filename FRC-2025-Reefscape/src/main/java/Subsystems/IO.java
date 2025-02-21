@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class IO extends SubsystemBase {
 
   // modify to correct button mapping
-  // private final int AButton = 1;
-  // private final int XButton = 2;
-  // private final int BButton = 3;
-  // private final int YButton = 4;
-  // private final int LeftBumper = 5;
-  // private final int RightBumper = 6;
+  private final int AButton = 1;
+  private final int BButton = 2;
+  private final int XButton = 3;
+  private final int YButton = 4;
+  private final int LeftBumper = 5;
+  private final int RightBumper = 6;
 
   public CommandJoystick m_joystickController = new CommandJoystick(0);
   public CommandXboxController m_controller = new CommandXboxController(1);
@@ -43,22 +43,22 @@ public class IO extends SubsystemBase {
 
   public boolean GetButtonB() {
     return m_controller.b().getAsBoolean();
-    // return m_controller.button(LiftLauncherButton).getAsBoolean();
+    // return m_controller.button(BButton).getAsBoolean();
   }
 
   public boolean GetButtonX() {
     return m_controller.x().getAsBoolean();
-    // return m_controller.button(LowerLauncherButton).getAsBoolean();
+    // return m_controller.button(XButton).getAsBoolean();
   }
 
   public boolean GetButtonA() {
-    // return m_controller.button(AButton).getAsBoolean();
-    return m_controller.a().getAsBoolean();
+    return m_controller.button(AButton).getAsBoolean();
+    // return m_controller.a().getAsBoolean();
   }
 
   public boolean GetButtonY() {
-    // return m_controller.button(YButton).getAsBoolean();
-    return m_controller.y().getAsBoolean();
+    return m_controller.button(YButton).getAsBoolean();
+    // return m_controller.y().getAsBoolean();
   }
 
   public boolean GetLeftBumper() {

@@ -2,6 +2,9 @@ package Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import Subsystems.IO;
+
+import javax.lang.model.util.ElementScanner14;
+
 import Subsystems.Coral;
 
 public class CoralCommand extends Command {
@@ -18,25 +21,23 @@ public class CoralCommand extends Command {
     }
 
     public void initialize() {
-        System.out.println("Coral Command initialized...");
+        // System.out.println("Coral Command initialized...");
     }
 
     @Override
     public void execute() {
-        CoralBelt();
+
+        if (m_controller.GetButtonY()) {
+            m_coralSubsystem.GuideCoral(.5);
+        } else if (m_controller.GetButtonA()) {
+            m_coralSubsystem.GuideCoral(-.5);
+        } else {
+            m_coralSubsystem.GuideCoral(0);
+        }
 
         isFinished = true;
     }
 
-    private void CoralBelt() {
-        if (m_controller.GetButtonX()) {
-            m_coralSubsystem.CoralGuide(.20);
-        } else {
-            if (m_controller.GetButtonB()) {
-                m_coralSubsystem.CoralGuide(-.20);
-            }
-        }
-    }
 
     public void end(boolean interrupted) {
     }

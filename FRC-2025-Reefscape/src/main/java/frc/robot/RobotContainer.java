@@ -7,6 +7,9 @@ import Subsystems.Coral;
 import Subsystems.Elevator;
 import Subsystems.Algae;
 
+import Commands.AlgaeCommand;
+import Commands.ElevatorCommand;
+import Commands.CoralCommand;
 import Commands.DriveCommand;
 import Commands.AlgaeAutoCommand;
 import Commands.DriveAutoCommand;
@@ -37,6 +40,9 @@ public class RobotContainer {
   private Algae m_alage;
 
   private DriveCommand m_DriveCommand;
+  private AlgaeCommand m_AlgaeCommand;
+  private CoralCommand m_CoralCommand;
+  private ElevatorCommand m_ElevatorCommand;
 
   // private Auto m_auto = new Auto(m_driveController);
 
@@ -95,6 +101,10 @@ public class RobotContainer {
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);
+      m_AlgaeCommand = new AlgaeCommand(m_alage, m_controller);
+      m_CoralCommand = new CoralCommand(m_coral, m_controller);
+      m_ElevatorCommand = new ElevatorCommand(m_elevator, m_controller);
+
 
       // Start camera server for teleop
       UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -103,8 +113,10 @@ public class RobotContainer {
       // Schedule the drive controller to move
       m_driveController.setDefaultCommand(m_DriveCommand);
 
-      // Schedule the launcher
-
+      // Schedule the Commands
+      m_coral.setDefaultCommand(m_CoralCommand);
+      m_alage.setDefaultCommand(m_AlgaeCommand);
+      m_elevator.setDefaultCommand(m_ElevatorCommand);
     }
 
     // --- Simulator variable setup ----///

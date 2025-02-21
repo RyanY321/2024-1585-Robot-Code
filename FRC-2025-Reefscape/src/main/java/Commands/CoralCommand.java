@@ -3,8 +3,6 @@ package Commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import Subsystems.IO;
 
-import javax.lang.model.util.ElementScanner14;
-
 import Subsystems.Coral;
 
 public class CoralCommand extends Command {
@@ -26,7 +24,12 @@ public class CoralCommand extends Command {
 
     @Override
     public void execute() {
+        CoralBelt();
 
+        isFinished = true;
+    }
+
+    private void CoralBelt() {
         if (m_controller.GetButtonY()) {
             m_coralSubsystem.GuideCoral(.5);
         } else if (m_controller.GetButtonA()) {
@@ -34,8 +37,6 @@ public class CoralCommand extends Command {
         } else {
             m_coralSubsystem.GuideCoral(0);
         }
-
-        isFinished = true;
     }
 
 

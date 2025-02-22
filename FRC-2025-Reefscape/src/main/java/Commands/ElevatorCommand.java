@@ -19,12 +19,10 @@ public class ElevatorCommand extends Command {
     }
 
     public void initialize() {
-        // System.out.println("Elevator Command initialized...");
     }
 
     @Override
     public void execute() {
-        System.out.println("were executing the elevator command...");
         ElevatorDrive();
 
         isFinished = true;
@@ -32,11 +30,11 @@ public class ElevatorCommand extends Command {
 
     private void ElevatorDrive() {
         if (m_controller.DPadUp()) {
-            m_elevatorSubsystem.ElevatorGuide(.5);
+            m_elevatorSubsystem.GuideElevator(.5);
         } else if (m_controller.DPadDown()) {
-            m_elevatorSubsystem.ElevatorGuide(-.5);
+            m_elevatorSubsystem.GuideElevator(-.5);
         } else {
-            m_elevatorSubsystem.ElevatorGuide(0);
+            m_elevatorSubsystem.GuideElevator(0);
         }
     }
 

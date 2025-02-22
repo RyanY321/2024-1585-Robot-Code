@@ -24,7 +24,6 @@ public class AlgaeCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("were executing the algae command...");
         Shooter();
 
         isFinished = true;

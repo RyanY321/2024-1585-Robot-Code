@@ -15,7 +15,7 @@ public class CoralCommand extends Command {
         m_coralSubsystem = coralSubsystem;
         m_controller = controller;
         addRequirements(coralSubsystem);
-        addRequirements(controller);
+        // addRequirements(controller);
     }
 
     public void initialize() {
@@ -24,6 +24,7 @@ public class CoralCommand extends Command {
 
     @Override
     public void execute() {
+        System.out.println("were executing the coral command...");
         CoralBelt();
 
         isFinished = true;

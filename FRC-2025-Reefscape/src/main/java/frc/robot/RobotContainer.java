@@ -101,8 +101,8 @@ public class RobotContainer {
       // Front and Back Motors are in the PWM channels
       // Lift and Feeder Motors are in the CAN channels
       m_DriveCommand = new DriveCommand(m_driveController, m_controller);
-      m_AlgaeCommand = new AlgaeCommand(m_alage, m_controller);
       m_CoralCommand = new CoralCommand(m_coral, m_controller);
+      m_AlgaeCommand = new AlgaeCommand(m_alage, m_controller);
       m_ElevatorCommand = new ElevatorCommand(m_elevator, m_controller);
 
 

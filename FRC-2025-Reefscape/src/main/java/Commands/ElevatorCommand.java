@@ -14,8 +14,8 @@ public class ElevatorCommand extends Command {
     public ElevatorCommand(Elevator elevatorSubsystem, IO controller) {
         m_elevatorSubsystem = elevatorSubsystem;
         m_controller = controller;
-        addRequirements(m_elevatorSubsystem);
-        addRequirements(controller);
+        addRequirements(elevatorSubsystem);
+        // addRequirements(controller);
     }
 
     public void initialize() {
@@ -24,6 +24,7 @@ public class ElevatorCommand extends Command {
 
     @Override
     public void execute() {
+        System.out.println("were executing the elevator command...");
         ElevatorDrive();
 
         isFinished = true;

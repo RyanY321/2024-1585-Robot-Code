@@ -15,7 +15,7 @@ public class AlgaeCommand extends Command {
         m_algaeSubsystem = algaeSubsystem;
         m_controller = controller;
         addRequirements(algaeSubsystem);
-        addRequirements(controller);
+        // addRequirements(controller);
     }
 
     public void initialize() {
@@ -24,6 +24,7 @@ public class AlgaeCommand extends Command {
 
     @Override
     public void execute() {
+        System.out.println("were executing the algae command...");
         Shooter();
 
         isFinished = true;

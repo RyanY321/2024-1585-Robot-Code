@@ -114,9 +114,9 @@ public class RobotContainer {
       m_driveController.setDefaultCommand(m_DriveCommand);
 
       // Schedule the Commands
-      m_coral.setDefaultCommand(m_CoralCommand);
-      m_alage.setDefaultCommand(m_AlgaeCommand);
-      m_elevator.setDefaultCommand(m_ElevatorCommand);
+      m_coral.setDefaultCommand((m_CoralCommand));
+      m_alage.setDefaultCommand((m_AlgaeCommand));
+      m_elevator.setDefaultCommand((m_ElevatorCommand));
     }
 
     // --- Simulator variable setup ----///

@@ -52,13 +52,13 @@ public class IO extends SubsystemBase {
   }
 
   public boolean GetButtonA() {
-    return m_controller.button(AButton).getAsBoolean();
-    // return m_controller.a().getAsBoolean();
+    // return m_controller.button(AButton).getAsBoolean();
+    return m_controller.a().getAsBoolean();
   }
 
   public boolean GetButtonY() {
-    return m_controller.button(YButton).getAsBoolean();
-    // return m_controller.y().getAsBoolean();
+    // return m_controller.button(YButton).getAsBoolean();
+    return m_controller.y().getAsBoolean();
   }
 
   public boolean GetLeftBumper() {

@@ -23,11 +23,6 @@ public class Coral extends SubsystemBase {
         SparkMaxConfig config = new SparkMaxConfig();
         SparkMaxConfig m_beltMotorConfig = new SparkMaxConfig();
 
-        // Creating The Invert Variables For Spark Max
-
-
-        // Setting Config Parameters
-
         config
             .idleMode(IdleMode.kBrake);
 

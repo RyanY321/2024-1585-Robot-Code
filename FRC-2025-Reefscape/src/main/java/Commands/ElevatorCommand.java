@@ -19,6 +19,7 @@ public class ElevatorCommand extends Command {
     }
 
     public void initialize() {
+        // System.out.println("Elevator Command Initialized...");
     }
 
     @Override

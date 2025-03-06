@@ -31,11 +31,11 @@ public class ElevatorCommand extends Command {
 
     private void ElevatorDrive() {
         if (m_controller.DPadUp()) {
-            m_elevatorSubsystem.GuideElevator(.5);
+            m_elevatorSubsystem.GuideElevator(.80);
         } else if (m_controller.DPadDown()) {
-            m_elevatorSubsystem.GuideElevator(-.5);
+            m_elevatorSubsystem.GuideElevator(-.80);
         } else {
-            m_elevatorSubsystem.GuideElevator(0);
+            m_elevatorSubsystem.GuideElevator(0.05);
         }
     }
 

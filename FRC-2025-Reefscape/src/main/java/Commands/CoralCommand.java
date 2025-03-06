@@ -31,9 +31,9 @@ public class CoralCommand extends Command {
 
     private void CoralBelt() {
         if (m_controller.GetButtonY()) {
-            m_coralSubsystem.GuideCoral(.5);
+            m_coralSubsystem.GuideCoral(1);
         } else if (m_controller.GetButtonA()) {
-            m_coralSubsystem.GuideCoral(-.5);
+            m_coralSubsystem.GuideCoral(-1);
         } else {
             m_coralSubsystem.GuideCoral(0);
         }

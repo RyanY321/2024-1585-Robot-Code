@@ -24,18 +24,29 @@ public class CoralCommand extends Command {
 
     @Override
     public void execute() {
-        CoralBelt();
+        GroupA();
+        GroupB();
 
         isFinished = true;
     }
 
-    private void CoralBelt() {
+    private void GroupA() {
         if (m_controller.GetButtonY()) {
-            m_coralSubsystem.GuideCoral(1);
+            m_coralSubsystem.GroupA(1.00);
         } else if (m_controller.GetButtonA()) {
-            m_coralSubsystem.GuideCoral(-1);
+            m_coralSubsystem.GroupA(-1.00);
         } else {
-            m_coralSubsystem.GuideCoral(0);
+            m_coralSubsystem.GroupA(0);
+        }
+    }
+
+    private void GroupB() {
+        if (m_controller.GetLeftBumper()) {
+            m_coralSubsystem.GroupB(1.00);
+        } else if (m_controller.getRightBumper()) {
+            m_coralSubsystem.GroupB(-1.00);
+        } else {
+            m_coralSubsystem.GroupB(0);
         }
     }
 

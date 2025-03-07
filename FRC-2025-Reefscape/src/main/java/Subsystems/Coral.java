@@ -6,41 +6,59 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
+import Commands.CoralAutoCommand;
+
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Coral extends SubsystemBase {
-    private final SparkMax m_beltMotor;
+    private final SparkMax m_motorGroupA;
+    private final SparkMax m_motorGroupB;
 
     private Coral m_controller;
     
-    public Coral(int BeltMotorChannelCAN) {
+    public Coral(int MotorGroupAChannelCAN, int MotorGroupBChannelCAN) {
         // Create New Spark Max Objects
-        m_beltMotor = new SparkMax(BeltMotorChannelCAN, SparkLowLevel.MotorType.kBrushed);
+        m_motorGroupA = new SparkMax(MotorGroupAChannelCAN, SparkLowLevel.MotorType.kBrushed);
+        m_motorGroupB = new SparkMax(MotorGroupBChannelCAN, SparkLowLevel.MotorType.kBrushed);
         SparkMaxConfig config = new SparkMaxConfig();
-        SparkMaxConfig m_beltMotorConfig = new SparkMaxConfig();
+        SparkMaxConfig motorGroupAConfig = new SparkMaxConfig();
+        SparkMaxConfig motorGroupBConfig = new SparkMaxConfig();
 
         config
             .idleMode(IdleMode.kBrake);
 
-        m_beltMotorConfig
+        motorGroupAConfig
             .inverted(false);
 
-        m_beltMotor.configure(m_beltMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_motorGroupA.configure(motorGroupAConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_motorGroupB.configure(motorGroupBConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     //Crate A New Command
-    public Command CoralGuide(double CoralGuideSpeed) {
+    public Command GroupAGuide(double GroupASpeed) {
         return run(
                 () -> {
-                    this.GuideCoral(CoralGuideSpeed);
+                    this.GroupA(GroupASpeed);
                 });
     }
 
-    public void GuideCoral(double CoralGuideSpeed) {
-        m_beltMotor.set(CoralGuideSpeed);
+    public void GroupA(double GroupASpeed) {
+        m_motorGroupA.set(GroupASpeed);
+    }
+
+    public Command GroupBGuide(double GroupBSpeed) {
+        return run(
+                () -> {
+                    this.GroupB(GroupBSpeed);
+                });
+    }
+
+    public void GroupB(double GroupBSpeed) {
+        m_motorGroupB.set(GroupBSpeed);
     }
 
 
@@ -52,7 +70,8 @@ public class Coral extends SubsystemBase {
     }
 
     public void AutoGuideCoral(double CoralGuideAutoSpeed) {
-        m_beltMotor.set(CoralGuideAutoSpeed);
+        m_motorGroupA.set(CoralGuideAutoSpeed);
+        m_motorGroupB.set(CoralGuideAutoSpeed);
     }
 
     public void periodic() {

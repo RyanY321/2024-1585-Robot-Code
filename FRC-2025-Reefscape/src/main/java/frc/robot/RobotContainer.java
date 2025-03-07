@@ -94,7 +94,7 @@ public class RobotContainer {
       // CAN ID 3 = Right Motor A
       // CAN ID 4 = Right Motor B
       m_driveController = new Drive(m_gyro);
-      m_coral = new Coral(5);
+      m_coral = new Coral(5, 8);
       m_elevator = new Elevator(6);
       m_alage = new Algae(7);
 

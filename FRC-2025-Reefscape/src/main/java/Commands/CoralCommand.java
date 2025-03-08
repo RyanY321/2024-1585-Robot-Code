@@ -32,9 +32,9 @@ public class CoralCommand extends Command {
 
     private void GroupA() {
         if (m_controller.GetButtonY()) {
-            m_coralSubsystem.GroupA(1.00);
+            m_coralSubsystem.GroupA(.3);
         } else if (m_controller.GetButtonA()) {
-            m_coralSubsystem.GroupA(-1.00);
+            m_coralSubsystem.GroupA(-.3);
         } else {
             m_coralSubsystem.GroupA(0);
         }

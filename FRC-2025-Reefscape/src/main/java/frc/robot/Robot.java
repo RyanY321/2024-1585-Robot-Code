@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
       // Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetLauncherAngleGyro());
       SmartDashboard.putData("Robot Position", m_robotContainer.m_gyro.GetGyro());
       SmartDashboard.putData("Launcher Posititon", m_robotContainer.m_gyro.GetLauncherAngleGyro());
+      SmartDashboard.putNumber("Elevator Height", m_robotContainer.m_elevator.GetHeight());
+
     }
 
     // Used for robot SIM

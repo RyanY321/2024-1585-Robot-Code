@@ -53,14 +53,19 @@ public class Drive extends SubsystemBase {
         m_leftMotorBConfig
             .follow(m_leftMotorA);
 
-        m_rightMotorB.configure(m_rightMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        m_leftMotorB.configure(m_leftMotorBConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+        m_rightMotorB.configure(m_rightMotorBConfig,
+         ResetMode.kResetSafeParameters,
+          PersistMode.kPersistParameters);
+
+        m_leftMotorB.configure(m_leftMotorBConfig, 
+        ResetMode.kResetSafeParameters,
+         PersistMode.kNoPersistParameters);
 
         // m_rightMotor = new PWMSparkMax(rightMotorChannel);
         m_driveController = new DifferentialDrive(m_leftMotorA, m_rightMotorA);
         m_driveController.setSafetyEnabled(false);
         m_driveController.setExpiration(0.1);
-        m_driveController.setMaxOutput(1);
+        m_driveController.setMaxOutput(.8);
     }
 
     public Command moveArcadeCommand(double xSpeed, double zRotation) {

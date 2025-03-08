@@ -1,5 +1,6 @@
 package Commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import Subsystems.IO;
 
@@ -10,12 +11,12 @@ public class ElevatorCommand extends Command {
     private final IO m_controller;
 
     private boolean isFinished = false;
+    private double m_distance = 0;
 
     public ElevatorCommand(Elevator elevatorSubsystem, IO controller) {
         m_elevatorSubsystem = elevatorSubsystem;
         m_controller = controller;
         addRequirements(elevatorSubsystem);
-        // addRequirements(controller);
     }
 
     public void initialize() {
@@ -24,12 +25,17 @@ public class ElevatorCommand extends Command {
 
     @Override
     public void execute() {
+
+        m_elevatorSubsystem.SetHeight();
+        SmartDashboard.putNumber("Elevator Height", m_elevatorSubsystem.GetHeight());
+
         ElevatorDrive();
 
         isFinished = true;
     }
 
     private void ElevatorDrive() {
+
         if (m_controller.DPadUp()) {
             m_elevatorSubsystem.GuideElevator(.80);
         } else if (m_controller.DPadDown()) {

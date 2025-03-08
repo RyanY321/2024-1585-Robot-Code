@@ -36,7 +36,7 @@ public class RobotContainer {
   public Gyro m_gyro;
   private Drive m_driveController;
   private Coral m_coral;
-  private Elevator m_elevator;
+  public Elevator m_elevator;
   private Algae m_alage;
 
   private DriveCommand m_DriveCommand;
@@ -94,8 +94,8 @@ public class RobotContainer {
       // CAN ID 3 = Right Motor A
       // CAN ID 4 = Right Motor B
       m_driveController = new Drive(m_gyro);
-      m_coral = new Coral(5, 8);
-      m_elevator = new Elevator(6);
+      m_coral = new Coral(5,8);
+      m_elevator = new Elevator(6,1);
       m_alage = new Algae(7);
 
       // Front and Back Motors are in the PWM channels

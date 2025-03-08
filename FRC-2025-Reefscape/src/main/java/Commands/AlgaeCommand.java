@@ -32,7 +32,7 @@ public class AlgaeCommand extends Command {
     private void Shooter() {
         if (m_controller.GetLeftBumper()) {
             m_algaeSubsystem.ShootAlgae(.5);
-        } else if (m_controller.getRightBumper()) {
+        } else if (m_controller.GetRightBumper()) {
             m_algaeSubsystem.ShootAlgae(-.5);
         } else {
             m_algaeSubsystem.ShootAlgae(0);

@@ -66,7 +66,7 @@ public class IO extends SubsystemBase {
     return m_controller.leftBumper().getAsBoolean();
   }
 
-  public boolean getRightBumper() {
+  public boolean GetRightBumper() {
       // return m_controller.button(RightBumper).getAsBoolean();
       return m_controller.rightBumper().getAsBoolean();
   }

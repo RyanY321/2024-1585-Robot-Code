@@ -19,10 +19,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Coral extends SubsystemBase {
     private final SparkMax m_motorGroupA;
     private final SparkMax m_motorGroupB;
+    private final DigitalInput m_coralDetect;
 
     private Coral m_controller;
     
-    public Coral(int MotorGroupAChannelCAN, int MotorGroupBChannelCAN) {
+    public Coral(int MotorGroupAChannelCAN, int MotorGroupBChannelCAN, int coralDetectPin) {
+
+        m_coralDetect = new DigitalInput(coralDetectPin);
+
         // Create New Spark Max Objects
         m_motorGroupA = new SparkMax(MotorGroupAChannelCAN, SparkLowLevel.MotorType.kBrushed);
         m_motorGroupB = new SparkMax(MotorGroupBChannelCAN, SparkLowLevel.MotorType.kBrushed);

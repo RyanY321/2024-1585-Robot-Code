@@ -63,16 +63,21 @@ public class Elevator extends SubsystemBase {
 
     public void GuideElevator(double ElevatorSpeed) {
 
+        boolean topHit = m_heightLimitTop.get();
+        boolean bottomHit = m_heightLimitBottom.get();
+
         //Top limit switch hit
-        if(m_heightLimitTop.get())
+        if(!topHit)
         {
+            System.out.println("Top Limit Hit");
             m_elevatorMotor.set(0);
             return;
         }
 
         //bottom limit switch hit
-        else if(m_heightLimitBottom.get())
+        if(!bottomHit)
         {
+            System.out.println("Bottom Limit Hit");
             m_elevatorMotor.set(0);
             return;
         }

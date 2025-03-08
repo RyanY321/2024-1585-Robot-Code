@@ -7,6 +7,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import com.revrobotics.spark.SparkMax;
@@ -25,10 +26,18 @@ public class Drive extends SubsystemBase {
     private final Gyro m_gyro;
     private double kP = 1;
 
+    private final DigitalInput m_leftWheelCounter;
+    private final DigitalInput m_rightWheelCounter;
+
 
     @SuppressWarnings("deprecation")
-    public Drive(Gyro gyro) {
+    public Drive(Gyro gyro, int leftWheelCounterDIO, int m_rightWheelCounterDIO) {
+        
         m_gyro = gyro;
+
+        m_leftWheelCounter = new DigitalInput(leftWheelCounterDIO);
+        m_rightWheelCounter = new DigitalInput(m_rightWheelCounterDIO);
+
         // m_leftMotor = new PWMSparkMax(leftMotorChannel);
         m_leftMotorA = new SparkMax(1, SparkLowLevel.MotorType.kBrushed);
         m_leftMotorB = new SparkMax(2, SparkLowLevel.MotorType.kBrushed);

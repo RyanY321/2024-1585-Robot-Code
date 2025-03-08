@@ -15,17 +15,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Algae extends SubsystemBase{
     private final SparkMax m_shootMotor;
-    private final DigitalInput m_coralStop;
 
     private Algae m_controller;
 
-    public Algae(int ShootMotorChannelCAN, int CoralStopChannelDIO) {
+    public Algae(int ShootMotorChannelCAN) {
         m_shootMotor = new SparkMax(ShootMotorChannelCAN, SparkLowLevel.MotorType.kBrushed);
 
         SparkMaxConfig config = new SparkMaxConfig();
         SparkMaxConfig m_shootMotorConfig = new SparkMaxConfig();
-
-        m_coralStop = new DigitalInput(CoralStopChannelDIO);
 
         config
             .idleMode(IdleMode.kBrake);

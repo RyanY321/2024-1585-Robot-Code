@@ -77,7 +77,7 @@ public class Elevator extends SubsystemBase {
     {
         voltageFactor = 5/RobotController.getVoltage5V();
         double rangeDistance = m_elevatorHeight.getValue()*voltageFactor*0.125;
-        m_elevatorHeightCm = rangeDistance;
+        m_elevatorHeightCm = Math.round(rangeDistance);
     }
 
     public void periodic() {

@@ -62,16 +62,16 @@ public class Coral extends SubsystemBase {
     }
 
 
-    public Command AutoCoralGuide(double CoralGuideAutoSpeed) {
+    public Command AutoCoralGuide(double CoralGuideGroupASpeed, double CoralGuideGroupBSpeed) {
         return run(
                 () -> {
-                    this.AutoGuideCoral(CoralGuideAutoSpeed);
+                    this.AutoGuideCoral(CoralGuideGroupASpeed, CoralGuideGroupBSpeed);
                 });
     }
 
-    public void AutoGuideCoral(double CoralGuideAutoSpeed) {
-        m_motorGroupA.set(CoralGuideAutoSpeed);
-        m_motorGroupB.set(CoralGuideAutoSpeed);
+    public void AutoGuideCoral(double CoralGuideGroupASpeed, double CoralGuideGroupBSpeed) {
+        m_motorGroupA.set(CoralGuideGroupASpeed);
+        m_motorGroupB.set(CoralGuideGroupBSpeed);
     }
 
     public void periodic() {

@@ -8,9 +8,11 @@ import Subsystems.Elevator;
 import Subsystems.Algae;
 
 import Commands.AlgaeCommand;
+import Commands.CoralAutoCommand;
 import Commands.ElevatorCommand;
 import Commands.CoralCommand;
 import Commands.DriveCommand;
+import Commands.ElevatorAutoCommand;
 import Commands.AlgaeAutoCommand;
 import Commands.DriveAutoCommand;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -155,9 +157,27 @@ public class RobotContainer {
 
     //Drive Out
     m_progOneAuto.addCommands(
-        new DriveAutoCommand(m_driveController, -0.50, -0.50),
+        new DriveAutoCommand(m_driveController, -.5, -.5),
         new WaitCommand(2.0),
         new DriveAutoCommand(m_driveController, 0.00, 0.00));
+
+    m_progTwoAuto.addCommands(
+      new DriveAutoCommand(m_driveController, -.5, -.5),
+      new WaitCommand(1.0),
+      new DriveAutoCommand(m_driveController, 0, 0)
+    );
+
+    m_progThreeAuto.addCommands(
+      new DriveAutoCommand(m_driveController, -.5, -5),
+      new WaitCommand(3.0),
+      new DriveAutoCommand(m_driveController, 0, 0)
+    );
+
+    m_progFourAuto.addCommands(
+      new DriveAutoCommand(m_driveController, -.5, -.5),
+      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, 0, 0)
+    );
   }
   
 

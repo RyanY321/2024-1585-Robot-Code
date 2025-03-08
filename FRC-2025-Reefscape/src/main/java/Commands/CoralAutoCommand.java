@@ -9,11 +9,13 @@ public class CoralAutoCommand extends Command {
     private final Coral m_coralSubsystem;
     private boolean m_coral = false;
     private boolean m_isFinished = false;
-    private double m_beltMotorSpeed;
+    private double m_groupASpeed;
+    private double m_groupBSpeed;
 
-    public CoralAutoCommand(Coral coralSubsystem, double beltMotorSpeed) {
+    public CoralAutoCommand(Coral coralSubsystem, double GroupA, double GroupB) {
         m_coralSubsystem = coralSubsystem;
-        m_beltMotorSpeed = beltMotorSpeed;
+        m_groupASpeed = GroupA;
+        m_groupBSpeed = GroupB;
 
         addRequirements(coralSubsystem);
     }
@@ -27,7 +29,7 @@ public class CoralAutoCommand extends Command {
     public void execute() {
         if (m_coral = true) {
             System.out.println("Engaging The Auto Coral Command...");
-            m_coralSubsystem.AutoGuideCoral(m_beltMotorSpeed);
+            m_coralSubsystem.AutoGuideCoral(m_groupASpeed, m_groupBSpeed);
             m_isFinished = true;
         }
     }

@@ -34,6 +34,9 @@ public class Coral extends SubsystemBase {
             .idleMode(IdleMode.kBrake);
 
         motorGroupAConfig
+            .inverted(true);
+
+        motorGroupBConfig
             .inverted(false);
 
         m_motorGroupA.configure(motorGroupAConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

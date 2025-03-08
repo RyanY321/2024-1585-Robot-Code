@@ -8,19 +8,24 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Algae extends SubsystemBase{
     private final SparkMax m_shootMotor;
+    private final DigitalInput m_coralStop;
 
     private Algae m_controller;
 
-    public Algae(int ShootMotorChannelCAN) {
+    public Algae(int ShootMotorChannelCAN, int CoralStopChannelDIO) {
         m_shootMotor = new SparkMax(ShootMotorChannelCAN, SparkLowLevel.MotorType.kBrushed);
 
         SparkMaxConfig config = new SparkMaxConfig();
         SparkMaxConfig m_shootMotorConfig = new SparkMaxConfig();
+
+        m_coralStop = new DigitalInput(CoralStopChannelDIO);
 
         config
             .idleMode(IdleMode.kBrake);

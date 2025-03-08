@@ -28,6 +28,8 @@ public class ElevatorCommand extends Command {
 
         m_elevatorSubsystem.SetHeight();
         SmartDashboard.putNumber("Elevator Height", m_elevatorSubsystem.GetHeight());
+        SmartDashboard.putBoolean("Top Limit", m_elevatorSubsystem.GetTopLimit());
+        SmartDashboard.putBoolean("Bottom Limit", m_elevatorSubsystem.GetBottomLimit());
 
         ElevatorDrive();
 

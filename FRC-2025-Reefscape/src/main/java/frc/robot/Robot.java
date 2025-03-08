@@ -41,6 +41,8 @@ public class Robot extends TimedRobot {
       SmartDashboard.putData("Robot Position", m_robotContainer.m_gyro.GetGyro());
       SmartDashboard.putData("Launcher Posititon", m_robotContainer.m_gyro.GetLauncherAngleGyro());
       SmartDashboard.putNumber("Elevator Height", m_robotContainer.m_elevator.GetHeight());
+      SmartDashboard.putBoolean("Top Limit", m_robotContainer.m_elevator.GetTopLimit());
+      SmartDashboard.putBoolean("Bottom Limit", m_robotContainer.m_elevator.GetBottomLimit());
 
     }
 

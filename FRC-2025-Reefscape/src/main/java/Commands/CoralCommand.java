@@ -33,7 +33,7 @@ public class CoralCommand extends Command {
     private void GroupA() {
         if (m_controller.GetButtonY()) {
             m_coralSubsystem.GroupA(.3);
-        } else if (m_controller.GetButtonA()) {
+        } else if (m_controller.GetButtonB()) {
             m_coralSubsystem.GroupA(-.3);
         } else {
             m_coralSubsystem.GroupA(0);
@@ -41,9 +41,9 @@ public class CoralCommand extends Command {
     }
 
     private void GroupB() {
-        if (m_controller.GetLeftBumper()) {
+        if (m_controller.GetButtonX()) {
             m_coralSubsystem.GroupB(1.00);
-        } else if (m_controller.getRightBumper()) {
+        } else if (m_controller.GetButtonA()) {
             m_coralSubsystem.GroupB(-1.00);
         } else {
             m_coralSubsystem.GroupB(0);

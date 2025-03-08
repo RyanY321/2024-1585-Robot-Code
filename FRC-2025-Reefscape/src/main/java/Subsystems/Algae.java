@@ -28,7 +28,7 @@ public class Algae extends SubsystemBase{
             .idleMode(IdleMode.kBrake);
 
         m_shootMotorConfig
-            .inverted(false);
+            .inverted(true);
 
         m_shootMotor.configure(m_shootMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }

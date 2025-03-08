@@ -66,20 +66,29 @@ public class Elevator extends SubsystemBase {
         boolean topHit = m_heightLimitTop.get();
         boolean bottomHit = m_heightLimitBottom.get();
 
+        System.out.println(ElevatorSpeed);
+
+
         //Top limit switch hit
         if(!topHit)
         {
             System.out.println("Top Limit Hit");
-            m_elevatorMotor.set(0);
-            return;
+            if(ElevatorSpeed > 0)
+            {
+                m_elevatorMotor.set(0);
+                return;
+            }
         }
 
         //bottom limit switch hit
         if(!bottomHit)
         {
             System.out.println("Bottom Limit Hit");
-            m_elevatorMotor.set(0);
-            return;
+            if(ElevatorSpeed < 0)
+            {
+                m_elevatorMotor.set(0);
+                return;
+            }
         }
 
         m_elevatorMotor.set(ElevatorSpeed);

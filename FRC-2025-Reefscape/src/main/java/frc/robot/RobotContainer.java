@@ -168,22 +168,34 @@ public class RobotContainer {
         new WaitCommand(2.0),
         new DriveAutoCommand(m_driveController, 0.00, 0.00));
 
+    // Place Coral Straight
     m_progTwoAuto.addCommands(
-      new DriveAutoCommand(m_driveController, -.5, -.5),
-      new WaitCommand(1.0),
-      new DriveAutoCommand(m_driveController, 0, 0)
-    );
-
-    m_progThreeAuto.addCommands(
-      new DriveAutoCommand(m_driveController, -.5, -5),
-      new WaitCommand(3.0),
-      new DriveAutoCommand(m_driveController, 0, 0)
-    );
-
-    m_progFourAuto.addCommands(
-      new DriveAutoCommand(m_driveController, -.5, -.5),
+      new DriveAutoCommand(m_driveController, .5, .5),
       new WaitCommand(4.0),
-      new DriveAutoCommand(m_driveController, 0, 0)
+      new DriveAutoCommand(m_driveController, 0, 0),
+      new CoralAutoCommand(m_coral, .5, 0),
+      new WaitCommand(.5),
+      new CoralAutoCommand(m_coral, 0, .3)
+    );
+
+    // Place Coral Left
+    m_progThreeAuto.addCommands(
+      new DriveAutoCommand(m_driveController, .25, .5),
+      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, 0, 0),
+      new CoralAutoCommand(m_coral, .5, 0),
+      new WaitCommand(.5),
+      new CoralAutoCommand(m_coral, 0, .3)
+    );
+
+    // Place Coral Right
+    m_progFourAuto.addCommands(
+      new DriveAutoCommand(m_driveController, .5, .25),
+      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, 0, 0),
+      new CoralAutoCommand(m_coral, .5, 0),
+      new WaitCommand(.5),
+      new CoralAutoCommand(m_coral, 0, .3)
     );
   }
   
@@ -205,6 +217,12 @@ public class RobotContainer {
     switch (selectedAuto) {
       case Robot.programOneAuto:
         return m_progOneAuto;
+      case Robot.programTwoAuto:
+        return m_progTwoAuto;
+      case Robot.programThreeAuto:
+        return m_progThreeAuto;
+      case Robot.programFourAuto:
+        return m_progFourAuto;
       default:
         return m_progOneAuto;
 

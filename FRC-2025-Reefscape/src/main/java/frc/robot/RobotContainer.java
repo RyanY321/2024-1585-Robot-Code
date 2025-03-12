@@ -170,32 +170,36 @@ public class RobotContainer {
 
     // Place Coral Straight
     m_progTwoAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .5, .5),
-      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, -.50, -.50),
+      new WaitCommand(4),
       new DriveAutoCommand(m_driveController, 0, 0),
-      new CoralAutoCommand(m_coral, .5, 0),
-      new WaitCommand(.5),
-      new CoralAutoCommand(m_coral, 0, .3)
+      new CoralAutoCommand(m_coral, 1.00, 1.00),
+      new WaitCommand(2),
+      new CoralAutoCommand(m_coral, 0, 0)
     );
 
     // Place Coral Left
     m_progThreeAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .25, .5),
-      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, .50, .50),
+      new WaitCommand(4),
+      new DriveAutoCommand(m_driveController, .50, .25),
       new DriveAutoCommand(m_driveController, 0, 0),
-      new CoralAutoCommand(m_coral, .5, 0),
       new WaitCommand(.5),
-      new CoralAutoCommand(m_coral, 0, .3)
+      new CoralAutoCommand(m_coral, 1.00, 1.00),
+      new WaitCommand(2),
+      new CoralAutoCommand(m_coral, 0, 0)
     );
 
     // Place Coral Right
     m_progFourAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .5, .25),
-      new WaitCommand(4.0),
+      new DriveAutoCommand(m_driveController, .50, .50),
+      new WaitCommand(4),
+      new DriveAutoCommand(m_driveController, .25, .50),
       new DriveAutoCommand(m_driveController, 0, 0),
-      new CoralAutoCommand(m_coral, .5, 0),
       new WaitCommand(.5),
-      new CoralAutoCommand(m_coral, 0, .3)
+      new CoralAutoCommand(m_coral, 1.00, 1.00),
+      new WaitCommand(2),
+      new CoralAutoCommand(m_coral, 0, 0)
     );
   }
   

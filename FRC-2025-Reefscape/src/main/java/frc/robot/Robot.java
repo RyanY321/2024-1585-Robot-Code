@@ -17,8 +17,6 @@ public class Robot extends TimedRobot {
 
   public static final String programOneAuto = "Program One";
   public static final String programTwoAuto = "Program Two";
-  public static final String programThreeAuto = "Program Three";
-  public static final String programFourAuto = "Program Four";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -36,10 +34,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Populates Autonoumous Dropdown Menu
-    m_chooser.setDefaultOption("Backup", programOneAuto);
-    m_chooser.addOption("Shoot Coral Straight", programTwoAuto);
-    m_chooser.addOption("Shoot Coral Left", programThreeAuto);
-    m_chooser.addOption("Shoot Coral Right", programFourAuto);
+    m_chooser.setDefaultOption("Leave", programOneAuto);
+    m_chooser.addOption("Front", programTwoAuto);
 
     if (Robot.isReal()) {
       // Shuffleboard.getTab("Cresendo").add(m_robotContainer.m_gyro.GetGyro());

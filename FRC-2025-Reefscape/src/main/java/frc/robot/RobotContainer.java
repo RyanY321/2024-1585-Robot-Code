@@ -50,8 +50,6 @@ public class RobotContainer {
 
   private SequentialCommandGroup m_progOneAuto = new SequentialCommandGroup();
   private SequentialCommandGroup m_progTwoAuto = new SequentialCommandGroup();
-  private SequentialCommandGroup m_progThreeAuto = new SequentialCommandGroup();
-  private SequentialCommandGroup m_progFourAuto = new SequentialCommandGroup();
 
   private double rightAutoSpeed = .70;
   private double leftAutoSpeed = rightAutoSpeed * .98;
@@ -164,37 +162,14 @@ public class RobotContainer {
 
     //Drive Out
     m_progOneAuto.addCommands(
-        new DriveAutoCommand(m_driveController, .50, -50),
-        new WaitCommand(2.0),
+        new DriveAutoCommand(m_driveController, .80, .80),
+        new WaitCommand(1.00),
         new DriveAutoCommand(m_driveController, 0.00, 0.00));
 
     // Place Coral Straight
     m_progTwoAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .50, .50),
-      new WaitCommand(4),
-      new DriveAutoCommand(m_driveController, 0, 0),
-      new CoralAutoCommand(m_coral, 1.00, 1.00),
-      new WaitCommand(2),
-      new CoralAutoCommand(m_coral, 0, 0)
-    );
-
-    // Place Coral Left
-    m_progThreeAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .50, .50),
-      new WaitCommand(4),
-      new DriveAutoCommand(m_driveController, .50, .25),
-      new DriveAutoCommand(m_driveController, 0, 0),
-      new WaitCommand(.5),
-      new CoralAutoCommand(m_coral, 1.00, 1.00),
-      new WaitCommand(2),
-      new CoralAutoCommand(m_coral, 0, 0)
-    );
-
-    // Place Coral Right
-    m_progFourAuto.addCommands(
-      new DriveAutoCommand(m_driveController, .50, .50),
-      new WaitCommand(4),
-      new DriveAutoCommand(m_driveController, .25, .50),
+      new DriveAutoCommand(m_driveController, .80, .80),
+      new WaitCommand(2.0),
       new DriveAutoCommand(m_driveController, 0, 0),
       new WaitCommand(.5),
       new CoralAutoCommand(m_coral, 1.00, 1.00),
@@ -223,10 +198,6 @@ public class RobotContainer {
         return m_progOneAuto;
       case Robot.programTwoAuto:
         return m_progTwoAuto;
-      case Robot.programThreeAuto:
-        return m_progThreeAuto;
-      case Robot.programFourAuto:
-        return m_progFourAuto;
       default:
         return m_progOneAuto;
 
